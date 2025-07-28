@@ -1,0 +1,60 @@
+<main>
+    <section class="">
+        <div class="p-3">
+            <h3 class="h3 text-start">Lawyers</h3>
+
+            <div class="d-flex justify-content-end gap-1">
+                <a [routerLink]="['./add']" class="btn btn-sm btn-primary" title="add">
+                    <i class="fas fa-user-plus"></i> Add New Lawyer
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <ngx-datatable class="bootstrap table-striped shadow-sm p-3" [rows]="lawyers" [columnMode]="'force'"
+        [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [loadingIndicator]="isLoading" [limit]="10"
+        style="border-radius: 8px; overflow: hidden;">
+        <ngx-datatable-column name="Name" prop="name" [maxWidth]="150"></ngx-datatable-column>
+        <!-- <ngx-datatable-column name="Email" prop="email" [maxWidth]="300"></ngx-datatable-column> -->
+
+        <ngx-datatable-column name="Email" [minWidth]="200" [maxWidth]="300">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <span [title]="row.email">
+                    {{ row.email?.length > 20 ? (row.email | slice:0:20) + '...' : row.email }}
+                </span>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Speciality" prop="speciality" [maxWidth]="150"></ngx-datatable-column>
+        <ngx-datatable-column name="Phone" prop="phone" [maxWidth]="150"></ngx-datatable-column>
+        <ngx-datatable-column name="Address" [minWidth]="200" [maxWidth]="300">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <span [title]="row.address">
+                    {{ row.address?.length > 10 ? (row.address | slice:0:10) + '...' : row.address }}
+                </span>
+            </ng-template>
+        </ngx-datatable-column>
+        <!-- <ngx-datatable-column name="caseId" prop="caseId"></ngx-datatable-column> -->
+
+        <ngx-datatable-column name="Actions" [width]="250" [canAutoResize]="false" [sortable]="false"
+            [draggable]="false">
+            <ng-template let-row="row" ngx-datatable-cell-template [width]="250">
+                <div class="d-flex justify-content-start gap-1">
+                    <a [routerLink]="['./details',row.id]" class="btn btn-sm btn-outline-secondary" title="details">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <button class="btn btn-sm btn-outline-warning" title="edit" (click)="editLawyer(row.id)">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" title="delete" (click)="deleteLawyer(row.id)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary" title="calendar" (click)="calendar(row)">
+                        <i class="fas fa-calendar-alt"></i>
+                    </button>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</main>

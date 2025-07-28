@@ -1,0 +1,46 @@
+<main class="container mt-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+                <i class="fas fa-user me-2"></i> Lawyer Details
+            </h5>
+            <a [routerLink]="['/lawyer']" class="btn btn-sm btn-light">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
+
+        <div class="card-body">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Full Name</label>
+                    <div class="form-control bg-light">{{ lawyer?.name }}</div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Email</label>
+                    <div class="form-control bg-light">{{ lawyer?.email }}</div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Phone</label>
+                    <div class="form-control bg-light">{{ lawyer?.phone }}</div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Speciality</label>
+                    <div class="form-control bg-light">{{ lawyer?.speciality }}</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label fw-bold">Address</label>
+                    <div class="form-control bg-light text-wrap">{{ lawyer?.address }}</div>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label fw-bold">Related Case ID</label>
+                    <div class="form-control bg-light">{{ lawyer?.caseId }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

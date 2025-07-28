@@ -2,7 +2,7 @@ import { CoreModule, provideAbpCore, withOptions } from '@abp/ng.core';
 import { provideAbpOAuth } from '@abp/ng.oauth';
 import { provideSettingManagementConfig } from '@abp/ng.setting-management/config';
 import { provideFeatureManagementConfig } from '@abp/ng.feature-management';
-import { ThemeSharedModule, provideAbpThemeShared,} from '@abp/ng.theme.shared';
+import { ThemeSharedModule, provideAbpThemeShared } from '@abp/ng.theme.shared';
 import { provideIdentityConfig } from '@abp/ng.identity/config';
 import { provideAccountConfig } from '@abp/ng.account/config';
 import { provideTenantManagementConfig } from '@abp/ng.tenant-management/config';
@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APP_ROUTE_PROVIDER } from './route.provider';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,12 @@ import { APP_ROUTE_PROVIDER } from './route.provider';
     CoreModule,
     ThemeLeptonXModule.forRoot(),
     SideMenuLayoutModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-center', // أو 'toast-top-center'
+      closeButton: true,
+      progressBar: true,
+      newestOnTop: true,
+    }),
   ],
   providers: [
     APP_ROUTE_PROVIDER,
@@ -34,7 +41,7 @@ import { APP_ROUTE_PROVIDER } from './route.provider';
       withOptions({
         environment,
         registerLocaleFn: registerLocale(),
-      }),
+      })
     ),
     provideAbpOAuth(),
     provideIdentityConfig(),
