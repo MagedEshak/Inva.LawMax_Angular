@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListHearingComponent } from './list-hearing/list-hearing.component';
 import { AddHearingComponent } from './add-hearing/add-hearing.component';
 import { HearingDetailsComponent } from './hearing-details/hearing-details.component';
+import { EditHearingComponent } from './edit-hearing/edit-hearing.component';
+import { authGuard } from '@abp/ng.core';
 
 const routes: Routes = [
   {
@@ -14,11 +16,13 @@ const routes: Routes = [
     path: 'add',
     pathMatch: 'full',
     component: AddHearingComponent,
+    canActivate: [authGuard],
   },
   {
-    path: 'details',
+    path: 'edit/:id',
     pathMatch: 'full',
-    component: HearingDetailsComponent,
+    component: EditHearingComponent,
+    canActivate: [authGuard],
   },
 ];
 

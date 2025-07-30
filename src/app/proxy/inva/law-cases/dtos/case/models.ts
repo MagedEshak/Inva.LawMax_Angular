@@ -1,18 +1,24 @@
 import type { Status } from '../../enums/status.enum';
+import type { LawyerDto } from '../../../../dtos/lawyer/models';
+import type { HearingDto } from '../hearing/models';
 
 export interface CaseDto {
   id?: string;
   title?: string;
   description?: string;
   status?: Status;
-  lawyerId?: string;
   lawyerName?: string;
-  lawyerEmail?: string;
-  lawyerPhone?: string;
   lawyerSpeciality?: string;
-  hearingId?: string;
   hearingDate?: string;
   hearingLocation?: string;
+  creationTime?: string;
+  concurrencyStamp?: string;
+}
+
+export interface CaseLawyerHearingsWithNavigationProperty {
+  caseDto: CaseDto;
+  lawyerDto: LawyerDto;
+  hearingDto: HearingDto;
 }
 
 export interface CreateUpdateCaseDto {

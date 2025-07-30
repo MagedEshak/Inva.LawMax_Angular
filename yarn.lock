@@ -413,7 +413,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^19.0.0", "@angular/common@^19.0.0 || ^20.0.0", "@angular/common@>=11.0.2", "@angular/common@>=14.0.0", "@angular/common@>=16.0.0-0", "@angular/common@>=5.0.0", "@angular/common@~19.1.0", "@angular/common@19.1.8":
+"@angular/common@^19.0.0", "@angular/common@^19.0.0 || ^20.0.0", "@angular/common@>=11.0.2", "@angular/common@>=14.0.0", "@angular/common@>=5.0.0", "@angular/common@~19.1.0", "@angular/common@19.1.8":
   version "19.1.8"
   resolved "https://registry.npmjs.org/@angular/common/-/common-19.1.8.tgz"
   integrity sha512-JTErVPLOQ+S1AbzUzHvgwqreiYltKI2yBRVUaiKSvutuu5zRvePmw0Ybo49DygkU9IT0E+CN8EzXp1WtaUGXxQ==
@@ -441,7 +441,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^19.0.0", "@angular/core@^19.0.0 || ^20.0.0", "@angular/core@>=11.0.2", "@angular/core@>=14.0.0", "@angular/core@>=16.0.0-0", "@angular/core@>=5.0.0", "@angular/core@~19.1.0", "@angular/core@19.1.8":
+"@angular/core@^19.0.0", "@angular/core@^19.0.0 || ^20.0.0", "@angular/core@>=11.0.2", "@angular/core@>=14.0.0", "@angular/core@>=5.0.0", "@angular/core@~19.1.0", "@angular/core@19.1.8":
   version "19.1.8"
   resolved "https://registry.npmjs.org/@angular/core/-/core-19.1.8.tgz"
   integrity sha512-mhLQDpKNvg5ou15OMwAAqmdHnmms1c+2beShRj0+sKa8EdPC9Xrz0SFWuSEX6tUEtKbtRpaxKFczx/VtuOZ5OA==
@@ -477,7 +477,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/platform-browser@^19.0.0", "@angular/platform-browser@>=11.0.2", "@angular/platform-browser@>=16.0.0-0", "@angular/platform-browser@~19.1.0", "@angular/platform-browser@19.1.8":
+"@angular/platform-browser@^19.0.0", "@angular/platform-browser@>=11.0.2", "@angular/platform-browser@~19.1.0", "@angular/platform-browser@19.1.8":
   version "19.1.8"
   resolved "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-19.1.8.tgz"
   integrity sha512-EPk3QVjvEiVpZiC/GiX18dmxpMyH6udqcLHh+dmYWYo3hUlxQCzRGzHg3hyaT5eaBL/8bjE6MkiDFlKchKRjEw==
@@ -1707,6 +1707,11 @@
   version "1.6.0"
   resolved "https://registry.npmjs.org/@jsonjoy.com/util/-/util-1.6.0.tgz"
   integrity sha512-sw/RMbehRhN68WRtcKCpQOPfnH6lLP4GJfqzi3iYej8tnzpZUDr6UkZYJjcjjC0FWEJOJbyM3PTIwxucUmDG2A==
+
+"@kurkle/color@^0.3.0":
+  version "0.3.4"
+  resolved "https://registry.npmjs.org/@kurkle/color/-/color-0.3.4.tgz"
+  integrity sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==
 
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.5"
@@ -3013,6 +3018,13 @@ chart.js@^3.5.1:
   resolved "https://registry.npmjs.org/chart.js/-/chart.js-3.9.1.tgz"
   integrity sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w==
 
+chart.js@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/chart.js/-/chart.js-4.5.0.tgz"
+  integrity sha512-aYeC/jDgSEx8SHWZvANYMioYMZ2KX02W6f6uVfyteuCGcadDLcYVHdfdygsTQkQ4TKn5lghoojAsPj5pu0SnvQ==
+  dependencies:
+    "@kurkle/color" "^0.3.0"
+
 chokidar@^3.5.1:
   version "3.6.0"
   resolved "https://registry.npmjs.org/chokidar/-/chokidar-3.6.0.tgz"
@@ -4116,6 +4128,11 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
+
+fsevents@~2.3.2, fsevents@~2.3.3:
+  version "2.3.3"
+  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
+  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
 function-bind@^1.1.2:
   version "1.1.2"
@@ -5525,13 +5542,6 @@ ng-zorro-antd@~19.0.0:
     "@ant-design/icons-angular" "^19.0.0"
     "@ctrl/tinycolor" "^3.6.0"
     date-fns "^2.16.1"
-    tslib "^2.3.0"
-
-ngx-toastr@^19.0.0:
-  version "19.0.0"
-  resolved "https://registry.npmjs.org/ngx-toastr/-/ngx-toastr-19.0.0.tgz"
-  integrity sha512-6pTnktwwWD+kx342wuMOWB4+bkyX9221pAgGz3SHOJH0/MI9erLucS8PeeJDFwbUYyh75nQ6AzVtolgHxi52dQ==
-  dependencies:
     tslib "^2.3.0"
 
 node-addon-api@^6.1.0:
@@ -6996,6 +7006,11 @@ supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
+
+sweetalert2@^11.22.2:
+  version "11.22.2"
+  resolved "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.22.2.tgz"
+  integrity sha512-GFQGzw8ZXF23PO79WMAYXLl4zYmLiaKqYJwcp5eBF07wiI5BYPbZtKi2pcvVmfUQK+FqL1risJAMxugcPbGIyg==
 
 symbol-observable@4.0.0:
   version "4.0.0"

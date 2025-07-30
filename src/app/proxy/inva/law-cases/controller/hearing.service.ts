@@ -1,7 +1,7 @@
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { CreateUpdateHearingDto, HearingDto } from '../dtos/hearing/models';
+import type { CreateUpdateHearingDto, HearingDto, HearingWithNavigationPropertyDto } from '../dtos/hearing/models';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,7 @@ export class HearingService {
   
 
   getHearingById = (hearingGuid: string, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, HearingDto>({
+    this.restService.request<any, HearingWithNavigationPropertyDto>({
       method: 'GET',
       url: `/api/Hearing/${hearingGuid}`,
     },
@@ -36,7 +36,7 @@ export class HearingService {
   
 
   getList = (input: PagedAndSortedResultRequestDto, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, PagedResultDto<HearingDto>>({
+    this.restService.request<any, PagedResultDto<HearingWithNavigationPropertyDto>>({
       method: 'GET',
       url: '/api/Hearing/all',
       params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },

@@ -1,11 +1,11 @@
-import { LawyerDto } from './../../../proxy/dtos/lawyer/models';
 import { PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { id, NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 import { LawyerService } from 'src/app/proxy/inva/law-cases/controller';
+import { LawyerWithNavigationPropertyDto } from 'src/app/proxy/inva/law-cases/dtos/lawyer';
 
 @Component({
   selector: 'app-list-lawyers',
@@ -15,7 +15,7 @@ import { LawyerService } from 'src/app/proxy/inva/law-cases/controller';
   encapsulation: ViewEncapsulation.None,
 })
 export class ListLawyersComponent implements OnInit {
-  lawyers: LawyerDto[] = [];
+  lawyers: LawyerWithNavigationPropertyDto[] = [];
   totalCount: number;
   input: PagedAndSortedResultRequestDto = {
     maxResultCount: 100,
@@ -24,7 +24,7 @@ export class ListLawyersComponent implements OnInit {
   };
 
   isLoading = false;
-  constructor(private _lawyerService: LawyerService, private toastr: ToastrService) {}
+  constructor(private _lawyerService: LawyerService) {}
 
   ngOnInit(): void {
     this.loadAllLawyers();
@@ -38,24 +38,80 @@ export class ListLawyersComponent implements OnInit {
         this.lawyers = res.items;
         this.isLoading = false;
       },
-      error: err => {
-        this.toastr.error('Failed to add lawyer');
+      error: () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'error',
+          text: 'Failed to load Lawyers!',
+          toast: true,
+          position: 'bottom',
+          showConfirmButton: false,
+          timer: 5000,
+          background: '#651616ff',
+          color: '#fff',
+          customClass: {
+            popup: 'custom-swal-toast',
+          },
+        });
+
         this.isLoading = false;
       },
     });
   }
 
   deleteLawyer(id: string) {
-    if (confirm('Are you sure you want to delete this lawyer?')) {
-      this._lawyerService.delete(id).subscribe({
-        next: () => {
-          this.toastr.success('Lawyer deleted successfully');
-          this.loadAllLawyers();
-        },
-        error: () => {
-          this.toastr.error('Failed to delete lawyer');
-        },
-      });
-    }
+    Swal.fire({
+      icon: 'warning',
+      title: 'Are you sure?',
+      text: 'This action cannot be undone!',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+      background: '#dc3545',
+      color: '#fff',
+      position: 'center',
+      customClass: {
+        popup: 'custom-swal-toast',
+      },
+    }).then(result => {
+      if (result.isConfirmed) {
+        this._lawyerService.delete(id).subscribe({
+          next: () => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Deleted!',
+              text: 'Lawyer deleted successfully.',
+              toast: true,
+              position: 'bottom',
+              showConfirmButton: false,
+              timer: 4000,
+              background: '#166534',
+              color: '#fff',
+              customClass: {
+                popup: 'custom-swal-toast',
+              },
+            });
+
+            this.loadAllLawyers();
+          },
+          error: () => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Failed to delete lawyer.',
+              toast: true,
+              position: 'bottom',
+              showConfirmButton: false,
+              timer: 4000,
+              background: '#651616ff',
+              color: '#fff',
+              customClass: {
+                popup: 'custom-swal-toast',
+              },
+            });
+          },
+        });
+      }
+    });
   }
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListCaseComponent } from './list-case/list-case.component';
 import { AddCaseComponent } from './add-case/add-case.component';
 import { CaseDetailsComponent } from './case-details/case-details.component';
+import { EditCaseComponent } from './edit-case/edit-case.component';
 
 const routes: Routes = [
   {
@@ -16,9 +17,14 @@ const routes: Routes = [
     component: AddCaseComponent,
   },
   {
-    path: 'details',
+    path: 'details/:id',
     pathMatch: 'full',
     component: CaseDetailsComponent,
+  },
+  {
+    path: 'edit/:id',
+    pathMatch: 'full',
+    component: EditCaseComponent,
   },
 ];
 

@@ -1,3 +1,12 @@
+import type { CaseDto } from '../case/models';
+
+export interface HearingDto {
+  id?: string;
+  date?: string;
+  location?: string;
+  caseId?: string;
+  concurrencyStamp?: string;
+}
 
 export interface CreateUpdateHearingDto {
   date?: string;
@@ -6,9 +15,7 @@ export interface CreateUpdateHearingDto {
   concurrencyStamp?: string;
 }
 
-export interface HearingDto {
-  id?: string;
-  date?: string;
-  location?: string;
-  caseId?: string;
+export interface HearingWithNavigationPropertyDto {
+  hearing: HearingDto;
+  case: CaseDto;
 }

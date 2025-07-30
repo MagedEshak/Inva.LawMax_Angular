@@ -16,7 +16,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APP_ROUTE_PROVIDER } from './route.provider';
-import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,13 +26,7 @@ import { ToastrModule } from 'ngx-toastr';
     ThemeSharedModule,
     CoreModule,
     ThemeLeptonXModule.forRoot(),
-    SideMenuLayoutModule.forRoot(),
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-center', // أو 'toast-top-center'
-      closeButton: true,
-      progressBar: true,
-      newestOnTop: true,
-    }),
+    SideMenuLayoutModule.forRoot()
   ],
   providers: [
     APP_ROUTE_PROVIDER,

@@ -1,7 +1,7 @@
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { CaseDto, CreateUpdateCaseDto } from '../dtos/case/models';
+import type { CaseDto, CaseLawyerHearingsWithNavigationProperty, CreateUpdateCaseDto } from '../dtos/case/models';
 
 @Injectable({
   providedIn: 'root',
@@ -27,18 +27,18 @@ export class CaseService {
     { apiName: this.apiName,...config });
   
 
-  getCaseById = (caseGuid: string, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, CaseDto>({
+  getCaseWithLawyersAndHearingsById = (caseGuid: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, CaseLawyerHearingsWithNavigationProperty>({
       method: 'GET',
-      url: `/api/Case/${caseGuid}`,
+      url: `/api/Case/CaseWithLawyersAndHearings/${caseGuid}`,
     },
     { apiName: this.apiName,...config });
   
 
-  getList = (input: PagedAndSortedResultRequestDto, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, PagedResultDto<CaseDto>>({
+  getCaseWithLawyersAndHearingsList = (input: PagedAndSortedResultRequestDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, PagedResultDto<CaseLawyerHearingsWithNavigationProperty>>({
       method: 'GET',
-      url: '/api/Case/all',
+      url: '/api/Case/GetCaseWithLawyers',
       params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });

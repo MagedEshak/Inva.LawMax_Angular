@@ -1,16 +1,18 @@
+import { statusOptions } from './../../../proxy/inva/law-cases/enums/status.enum';
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { LawyerDto } from 'src/app/proxy/dtos/lawyer';
 import { LawyerService } from 'src/app/proxy/inva/law-cases/controller';
+import { LawyerWithNavigationPropertyDto } from 'src/app/proxy/inva/law-cases/dtos/lawyer';
 
 @Component({
   selector: 'app-lawyer-details',
-  imports: [RouterLink],
+  imports: [RouterLink, DatePipe],
   templateUrl: './lawyer-details.component.html',
   styleUrl: './lawyer-details.component.scss',
 })
 export class LawyerDetailsComponent implements OnInit {
-  lawyer: LawyerDto | null = null;
+  lawyer: LawyerWithNavigationPropertyDto | null = null;
 
   constructor(private route: ActivatedRoute, private lawyerService: LawyerService) {}
 
@@ -26,5 +28,10 @@ export class LawyerDetailsComponent implements OnInit {
         this.lawyer = lawyer;
       });
     }
+  }
+
+  getStatusLabel(status: number | undefined): string {
+    const option = statusOptions.find(opt => opt.value === status);
+    return option?.key ?? '—';
   }
 }

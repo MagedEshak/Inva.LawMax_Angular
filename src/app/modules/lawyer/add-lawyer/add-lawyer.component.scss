@@ -1,0 +1,8 @@
+::ng-deep .form-control:focus {
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+.card-header {
+    background: linear-gradient(45deg, #198754, #157347);
+}

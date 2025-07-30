@@ -15,44 +15,65 @@
     <ngx-datatable class="bootstrap table-striped shadow-sm p-3" [rows]="lawyers" [columnMode]="'force'"
         [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [loadingIndicator]="isLoading" [limit]="10"
         style="border-radius: 8px; overflow: hidden;">
-        <ngx-datatable-column name="Name" prop="name" [maxWidth]="150"></ngx-datatable-column>
-        <!-- <ngx-datatable-column name="Email" prop="email" [maxWidth]="300"></ngx-datatable-column> -->
+        <ngx-datatable-column name="Name" [minWidth]="150" [maxWidth]="300">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.lawyer.name}}
+            </ng-template>
+        </ngx-datatable-column>
 
         <ngx-datatable-column name="Email" [minWidth]="200" [maxWidth]="300">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                <span [title]="row.email">
-                    {{ row.email?.length > 20 ? (row.email | slice:0:20) + '...' : row.email }}
+                <span [title]="row.lawyer.email">
+                    {{ row.lawyer.email?.length > 20 ? (row.lawyer.email | slice:0:20) + '...' : row.lawyer.email }}
                 </span>
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Speciality" prop="speciality" [maxWidth]="150"></ngx-datatable-column>
-        <ngx-datatable-column name="Phone" prop="phone" [maxWidth]="150"></ngx-datatable-column>
+        <ngx-datatable-column name="Speciality" [minWidth]="150" [maxWidth]="300">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.lawyer.speciality}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Phone" [minWidth]="150" [maxWidth]="300">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.lawyer.phone}}
+            </ng-template>
+        </ngx-datatable-column>
+
         <ngx-datatable-column name="Address" [minWidth]="200" [maxWidth]="300">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                <span [title]="row.address">
-                    {{ row.address?.length > 10 ? (row.address | slice:0:10) + '...' : row.address }}
+                <span [title]="row.lawyer.address">
+                    {{ row.lawyer.address?.length > 10 ? (row.lawyer.address | slice:0:10) + '...' : row.lawyer.address
+                    }}
                 </span>
             </ng-template>
         </ngx-datatable-column>
-        <!-- <ngx-datatable-column name="caseId" prop="caseId"></ngx-datatable-column> -->
+
+        <ngx-datatable-column name="Case Title" [minWidth]="150" [maxWidth]="300">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.case?.title || 'No Case Assigned' }}
+            </ng-template>
+        </ngx-datatable-column>
+
 
         <ngx-datatable-column name="Actions" [width]="250" [canAutoResize]="false" [sortable]="false"
             [draggable]="false">
             <ng-template let-row="row" ngx-datatable-cell-template [width]="250">
                 <div class="d-flex justify-content-start gap-1">
-                    <a [routerLink]="['./details',row.id]" class="btn btn-sm btn-outline-secondary" title="details">
+                    <a [routerLink]="['./details',row.lawyer.id]" class="btn btn-sm btn-outline-secondary"
+                        title="details">
                         <i class="fas fa-eye"></i>
                     </a>
-                    <button class="btn btn-sm btn-outline-warning" title="edit" (click)="editLawyer(row.id)">
+                    <a [routerLink]="['./edit',row.lawyer.id]" class="btn btn-sm btn-outline-warning" title="edit">
                         <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn btn-sm btn-outline-danger" title="delete" (click)="deleteLawyer(row.id)">
+                    </a>
+                    <button class="btn btn-sm btn-outline-danger" title="delete" (click)="deleteLawyer(row.lawyer.id)">
                         <i class="fas fa-trash-alt"></i>
                     </button>
-                    <button class="btn btn-sm btn-outline-primary" title="calendar" (click)="calendar(row)">
+                    <!-- <button class="btn btn-sm btn-outline-primary" title="calendar" (click)="calendar(row.lawyer.id)">
                         <i class="fas fa-calendar-alt"></i>
-                    </button>
+                    </button> -->
                 </div>
             </ng-template>
         </ngx-datatable-column>
