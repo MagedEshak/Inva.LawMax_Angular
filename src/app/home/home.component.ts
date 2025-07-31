@@ -113,10 +113,11 @@ export class HomeComponent implements OnInit {
       .subscribe(response => {
         this.cases = response.items;
 
-        this.todayHearings = this.cases.filter(c => {
-          const hearingDate = c.hearingDto?.date?.split('T')[0]; // YYYY-MM-DD
-          return hearingDate === today;
-        });
+        // this.todayHearings = this.cases.filter(c => {
+        //   // const hearingDate = c.hearingDtos?.date.split('T')[0]; // YYYY-MM-DD
+        //   const hearingDate = c.hearingDtos.;
+        //   return hearingDate === today;
+        // });
       });
   }
 }

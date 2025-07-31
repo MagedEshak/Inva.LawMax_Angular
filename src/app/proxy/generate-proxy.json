@@ -4932,7 +4932,19 @@
           "regex": null
         },
         {
-          "name": "Title",
+          "name": "Number",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CaseTitle",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -4956,10 +4968,46 @@
           "regex": null
         },
         {
+          "name": "LitigationDegree",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "FinalVerdict",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "Status",
           "jsonName": null,
           "type": "Inva.LawCases.Enums.Status",
           "typeSimple": "enum",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Year",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -4992,30 +5040,6 @@
           "regex": null
         },
         {
-          "name": "HearingDate",
-          "jsonName": null,
-          "type": "System.DateTime?",
-          "typeSimple": "string?",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "HearingLocation",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
           "name": "CreationTime",
           "jsonName": null,
           "type": "System.DateTime",
@@ -5032,6 +5056,18 @@
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "HearingDtos",
+          "jsonName": null,
+          "type": "[Inva.LawCases.DTOs.Hearing.HearingDto]",
+          "typeSimple": "[Inva.LawCases.DTOs.Hearing.HearingDto]",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5073,10 +5109,10 @@
           "regex": null
         },
         {
-          "name": "HearingDto",
+          "name": "HearingDtos",
           "jsonName": null,
-          "type": "Inva.LawCases.DTOs.Hearing.HearingDto",
-          "typeSimple": "Inva.LawCases.DTOs.Hearing.HearingDto",
+          "type": "[Inva.LawCases.DTOs.Hearing.HearingDto]",
+          "typeSimple": "[Inva.LawCases.DTOs.Hearing.HearingDto]",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5094,7 +5130,19 @@
       "genericArguments": null,
       "properties": [
         {
-          "name": "Title",
+          "name": "Number",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CaseTitle",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -5118,10 +5166,46 @@
           "regex": null
         },
         {
+          "name": "LitigationDegree",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "FinalVerdict",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "Status",
           "jsonName": null,
-          "type": "Inva.LawCases.Enums.Status?",
-          "typeSimple": "enum?",
+          "type": "Inva.LawCases.Enums.Status",
+          "typeSimple": "enum",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Year",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5132,32 +5216,8 @@
         {
           "name": "LawyerId",
           "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "HearingId",
-          "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "TenantId",
-          "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
+          "type": "System.Guid",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5170,6 +5230,18 @@
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "HearingDtos",
+          "jsonName": null,
+          "type": "[Inva.LawCases.DTOs.Hearing.HearingDto]",
+          "typeSimple": "[Inva.LawCases.DTOs.Hearing.HearingDto]",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5277,6 +5349,18 @@
           "regex": null
         },
         {
+          "name": "Decision",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "CaseId",
           "jsonName": null,
           "type": "System.Guid?",
@@ -5346,10 +5430,22 @@
           "regex": null
         },
         {
+          "name": "Decision",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "CaseId",
           "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
+          "type": "System.Guid",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5424,10 +5520,10 @@
           "regex": null
         },
         {
-          "name": "Case",
+          "name": "Cases",
           "jsonName": null,
-          "type": "Inva.LawCases.DTOs.Case.CaseDto",
-          "typeSimple": "Inva.LawCases.DTOs.Case.CaseDto",
+          "type": "[Inva.LawCases.DTOs.Case.CaseDto]",
+          "typeSimple": "[Inva.LawCases.DTOs.Case.CaseDto]",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5684,10 +5780,10 @@
           "regex": null
         },
         {
-          "name": "CaseId",
+          "name": "Cases",
           "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
+          "type": "[Inva.LawCases.DTOs.Case.CaseDto]",
+          "typeSimple": "[Inva.LawCases.DTOs.Case.CaseDto]",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5789,10 +5885,10 @@
           "regex": null
         },
         {
-          "name": "CaseId",
+          "name": "Cases",
           "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
+          "type": "[Inva.LawCases.DTOs.Case.CaseDto]",
+          "typeSimple": "[Inva.LawCases.DTOs.Case.CaseDto]",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5805,41 +5901,6 @@
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        }
-      ]
-    },
-    "System.Nullable<T0>": {
-      "baseType": "System.ValueType",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": [
-        "T"
-      ],
-      "properties": [
-        {
-          "name": "HasValue",
-          "jsonName": null,
-          "type": "System.Boolean",
-          "typeSimple": "boolean",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "Value",
-          "jsonName": null,
-          "type": "T",
-          "typeSimple": "T",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,

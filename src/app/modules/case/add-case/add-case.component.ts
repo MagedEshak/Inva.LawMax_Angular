@@ -105,7 +105,7 @@ export class AddCaseComponent implements OnInit {
   }
   loadAvailableLawyers() {
     this._lawyerService.getList({ skipCount: 0, maxResultCount: 1000 }).subscribe(res => {
-      this.availableLawyers = res.items.filter(l => !l.lawyer.caseId);
+      this.availableLawyers = res.items.filter(l => !l.lawyer.cases);
     });
   }
 

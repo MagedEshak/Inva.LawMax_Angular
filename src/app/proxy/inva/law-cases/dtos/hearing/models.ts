@@ -4,6 +4,7 @@ export interface HearingDto {
   id?: string;
   date?: string;
   location?: string;
+  decision?: string;
   caseId?: string;
   concurrencyStamp?: string;
 }
@@ -11,6 +12,7 @@ export interface HearingDto {
 export interface CreateUpdateHearingDto {
   date?: string;
   location?: string;
+  decision?: string;
   caseId?: string;
   concurrencyStamp?: string;
 }

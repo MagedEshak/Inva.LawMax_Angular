@@ -61,7 +61,7 @@ export class EditHearingComponent implements OnInit {
           concurrencyStamp: hearing.hearing.concurrencyStamp,
         });
 
-        this.loadAvilableCases();
+        // this.loadAvilableCases();
       });
     }
   }
@@ -89,26 +89,26 @@ export class EditHearingComponent implements OnInit {
       const selectedCaseId = this.form.value.caseId;
       const selectedCase = this.availableCases.find(c => c.caseDto.id === selectedCaseId);
 
-      if (
-        selectedCase &&
-        selectedCase.hearingDto &&
-        selectedCase.hearingDto.id &&
-        selectedCase.hearingDto.id !== this.hearings?.hearing.id
-      ) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'This case is already assigned to another lawyer.',
-          toast: true,
-          position: 'bottom',
-          showConfirmButton: false,
-          timer: 4000,
-          background: '#651616ff',
-          color: '#fff',
-          customClass: { popup: 'custom-swal-toast' },
-        });
-        return;
-      }
+      // if (
+      //   selectedCase &&
+      //   selectedCase.hearingDto &&
+      //   selectedCase.hearingDto.id &&
+      //   selectedCase.hearingDto.id !== this.hearings?.hearing.id
+      // ) {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Error',
+      //     text: 'This case is already assigned to another lawyer.',
+      //     toast: true,
+      //     position: 'bottom',
+      //     showConfirmButton: false,
+      //     timer: 4000,
+      //     background: '#651616ff',
+      //     color: '#fff',
+      //     customClass: { popup: 'custom-swal-toast' },
+      //   });
+      //   return;
+      // }
 
       this.isLoading = true;
       this._hearingService.updateHearing(this.hearings.hearing.id, updateDto).subscribe({
@@ -173,15 +173,15 @@ export class EditHearingComponent implements OnInit {
     history.back();
   }
 
-  loadAvilableCases(): void {
-    this._caseService
-      .getCaseWithLawyersAndHearingsList({ skipCount: 0, maxResultCount: 1000, sorting: '' })
-      .subscribe(res => {
-        const currentLawyerCaseId = this.hearings?.hearing.caseId;
+  // loadAvilableCases(): void {
+  //   this._caseService
+  //     .getCaseWithLawyersAndHearingsList({ skipCount: 0, maxResultCount: 1000, sorting: '' })
+  //     .subscribe(res => {
+  //       const currentLawyerCaseId = this.hearings?.hearing.caseId;
 
-        this.availableCases = res.items.filter(
-          c => !c.hearingDto?.id || c.hearingDto.id === this.hearings?.hearing.id
-        );
-      });
-  }
+  //       this.availableCases = res.items.filter(
+  //         c => !c.hearingDtos?.id || c.hearingDtos.id === this.hearings?.hearing.id
+  //       );
+  //     });
+  // }
 }

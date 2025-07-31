@@ -1,3 +1,4 @@
+import type { CaseDto } from '../../inva/law-cases/dtos/case/models';
 
 export interface LawyerDto {
   id?: string;
@@ -6,7 +7,7 @@ export interface LawyerDto {
   phone?: string;
   address?: string;
   speciality?: string;
-  caseId?: string;
+  cases: CaseDto[];
   concurrencyStamp?: string;
 }
 
@@ -16,6 +17,6 @@ export interface CreateUpdateLawyerDto {
   phone?: string;
   address?: string;
   speciality?: string;
-  caseId?: string;
+  cases: CaseDto[];
   concurrencyStamp?: string;
 }

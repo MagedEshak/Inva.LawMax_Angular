@@ -3,5 +3,5 @@ import type { CaseDto } from '../case/models';
 
 export interface LawyerWithNavigationPropertyDto {
   lawyer: LawyerDto;
-  case: CaseDto;
+  cases: CaseDto[];
 }

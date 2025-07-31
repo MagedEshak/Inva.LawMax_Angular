@@ -41,11 +41,11 @@
             <div class="row gy-3">
                 <div class="col-md-6">
                     <label class="text-muted small">Date</label>
-                    <div class="fw-semibold">{{ case.hearingDto.date | date:'mediumDate' }}</div>
+                    <div class="fw-semibold">{{ case?.hearingDtos.date | date:'mediumDate' }}</div>
                 </div>
                 <div class="col-md-6">
                     <label class="text-muted small">Time</label>
-                    <div class="fw-semibold">{{ case.hearingDto.date | date:'shortTime' }}</div>
+                    <div class="fw-semibold">{{ case?.hearingDtos.date | date:'shortTime' }}</div>
                 </div>
                 <div class="col-md-12">
                     <label class="text-muted small">Description</label>

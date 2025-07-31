@@ -171,7 +171,7 @@ export class EditLawyerComponent implements OnInit {
     this._caseService
       .getCaseWithLawyersAndHearingsList({ skipCount: 0, maxResultCount: 1000, sorting: '' })
       .subscribe(res => {
-        const currentLawyerCaseId = this.lawyer?.lawyer.caseId;
+        const currentLawyerCaseId = this.lawyer?.lawyer.cases;
 
         this.availableCases = res.items.filter(
           c => !c.lawyerDto?.id || c.lawyerDto.id === this.lawyer?.lawyer.id
