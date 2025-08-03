@@ -413,7 +413,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^19.0.0", "@angular/common@^19.0.0 || ^20.0.0", "@angular/common@>=11.0.2", "@angular/common@>=14.0.0", "@angular/common@>=5.0.0", "@angular/common@~19.1.0", "@angular/common@19.1.8":
+"@angular/common@^19.0.0", "@angular/common@^19.0.0 || ^20.0.0", "@angular/common@>=11.0.2", "@angular/common@>=14.0.0", "@angular/common@>=5.0.0", "@angular/common@~19.1.0", "@angular/common@12 - 19", "@angular/common@19.1.8":
   version "19.1.8"
   resolved "https://registry.npmjs.org/@angular/common/-/common-19.1.8.tgz"
   integrity sha512-JTErVPLOQ+S1AbzUzHvgwqreiYltKI2yBRVUaiKSvutuu5zRvePmw0Ybo49DygkU9IT0E+CN8EzXp1WtaUGXxQ==
@@ -441,7 +441,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^19.0.0", "@angular/core@^19.0.0 || ^20.0.0", "@angular/core@>=11.0.2", "@angular/core@>=14.0.0", "@angular/core@>=5.0.0", "@angular/core@~19.1.0", "@angular/core@19.1.8":
+"@angular/core@^19.0.0", "@angular/core@^19.0.0 || ^20.0.0", "@angular/core@>=11.0.2", "@angular/core@>=14.0.0", "@angular/core@>=5.0.0", "@angular/core@~19.1.0", "@angular/core@12 - 19", "@angular/core@19.1.8":
   version "19.1.8"
   resolved "https://registry.npmjs.org/@angular/core/-/core-19.1.8.tgz"
   integrity sha512-mhLQDpKNvg5ou15OMwAAqmdHnmms1c+2beShRj0+sKa8EdPC9Xrz0SFWuSEX6tUEtKbtRpaxKFczx/VtuOZ5OA==
@@ -1463,6 +1463,30 @@
   version "5.15.4"
   resolved "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.4.tgz"
   integrity sha512-eYm8vijH/hpzr/6/1CJ/V/Eb1xQFW2nnUKArb3z+yUWv7HTwj6M7SP957oMjfZjAHU6qpoNc2wQvIxBLWYa/Jg==
+
+"@fullcalendar/angular@^6.1.18":
+  version "6.1.18"
+  resolved "https://registry.npmjs.org/@fullcalendar/angular/-/angular-6.1.18.tgz"
+  integrity sha512-OBdpz0OA/7a2QdLES3vAAIO/TddtaIh7v4mZDYSFqTAia+ISkgGEqb6rZUPcqoSNS/SRLbvowSUO8qgbHOQMTg==
+  dependencies:
+    tslib "^2.3.0"
+
+"@fullcalendar/core@^6.1.18", "@fullcalendar/core@~6.1.18":
+  version "6.1.18"
+  resolved "https://registry.npmjs.org/@fullcalendar/core/-/core-6.1.18.tgz"
+  integrity sha512-cD7XtZIZZ87Cg2+itnpsONCsZ89VIfLLDZ22pQX4IQVWlpYUB3bcCf878DhWkqyEen6dhi5ePtBoqYgm5K+0fQ==
+  dependencies:
+    preact "~10.12.1"
+
+"@fullcalendar/daygrid@^6.1.18":
+  version "6.1.18"
+  resolved "https://registry.npmjs.org/@fullcalendar/daygrid/-/daygrid-6.1.18.tgz"
+  integrity sha512-s452Zle1SdMEzZDw+pDczm8m3JLIZzS9ANMThXTnqeqJewW1gqNFYas18aHypJSgF9Fh9rDJjTSUw04BpXB/Mg==
+
+"@fullcalendar/interaction@^6.1.18":
+  version "6.1.18"
+  resolved "https://registry.npmjs.org/@fullcalendar/interaction/-/interaction-6.1.18.tgz"
+  integrity sha512-f/mD5RTjzw+Q6MGTMZrLCgIrQLIUUO9NV/58aM2J6ZBQZeRlNizDqmqldqyG+j49zj2vFhUfZibPrVKWm5yA4Q==
 
 "@humanwhocodes/config-array@^0.13.0":
   version "0.13.0"
@@ -6092,6 +6116,11 @@ postcss@^8.1.0, postcss@^8.2.14, postcss@^8.4.33, postcss@^8.4.49:
     nanoid "^3.3.11"
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
+
+preact@~10.12.1:
+  version "10.12.1"
+  resolved "https://registry.npmjs.org/preact/-/preact-10.12.1.tgz"
+  integrity sha512-l8386ixSsBdbreOAkqtrwqHwdvR35ID8c3rKPa8lCWuO86dBi32QWHV4vfsZK1utLLFMvw+Z5Ad4XLkZzchscg==
 
 prelude-ls@^1.2.1:
   version "1.2.1"

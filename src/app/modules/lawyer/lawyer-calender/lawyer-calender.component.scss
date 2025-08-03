@@ -19,7 +19,9 @@
 .card:hover {
     transform: scale(1.01);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}/* Base Calendar Container */
+}
+
+/* Base Calendar Container */
 ::ng-deep .fc {
     background-color: #ffffff;
     border-radius: 1rem;
@@ -66,11 +68,11 @@
     border-bottom: none !important;
 }
 
-::ng-deep .fc-col-header-cell-cushion{
+::ng-deep .fc-col-header-cell-cushion {
     color: #1E2A38;
-        font-weight: 500;
-        text-decoration: none !important;
-        border-bottom: none !important;
+    font-weight: 500;
+    text-decoration: none !important;
+    border-bottom: none !important;
 }
 
 /* Today cell */

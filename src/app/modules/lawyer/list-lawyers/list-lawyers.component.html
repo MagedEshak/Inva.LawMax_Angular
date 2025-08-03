@@ -1,12 +1,14 @@
 <main>
     <section class="">
         <div class="p-3">
-            <h3 class="h3 text-start">Lawyers</h3>
+            <h3 class="h4 fw-bold text-dark">Lawyers Directory</h3>
 
             <div class="d-flex justify-content-end gap-1">
-                <a [routerLink]="['./add']" class="btn btn-sm btn-primary" title="add">
-                    <i class="fas fa-user-plus"></i> Add New Lawyer
+                <a [routerLink]="['./add']" class="btn btn-sm text-white"
+                    style="background: linear-gradient(to right, #007bff, #0056b3)">
+                    <i class="fas fa-user-plus me-1"></i> Add New Lawyer
                 </a>
+
             </div>
         </div>
     </section>
@@ -15,33 +17,33 @@
     <ngx-datatable class="bootstrap table-striped shadow-sm p-3" [rows]="lawyers" [columnMode]="'force'"
         [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [loadingIndicator]="isLoading" [limit]="10"
         style="border-radius: 8px; overflow: hidden;">
-        <ngx-datatable-column name="Name" [minWidth]="150" [maxWidth]="300">
+        <ngx-datatable-column name="Name" [minWidth]="150">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{ row.lawyer.name}}
+                {{ row.lawyer.name?.length > 10 ? (row.lawyer.name | slice:0:10) + '...' : row.lawyer.name }}
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Email" [minWidth]="200" [maxWidth]="300">
+        <ngx-datatable-column name="Email" [minWidth]="200">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 <span [title]="row.lawyer.email">
-                    {{ row.lawyer.email?.length > 20 ? (row.lawyer.email | slice:0:20) + '...' : row.lawyer.email }}
+                    {{ row.lawyer.email?.length > 10 ? (row.lawyer.email | slice:0:10) + '...' : row.lawyer.email }}
                 </span>
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Speciality" [minWidth]="150" [maxWidth]="300">
+        <ngx-datatable-column name="Speciality" [minWidth]="150">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{ row.lawyer.speciality}}
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Phone" [minWidth]="150" [maxWidth]="300">
+        <ngx-datatable-column name="Phone" [minWidth]="150">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 {{ row.lawyer.phone}}
             </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Address" [minWidth]="200" [maxWidth]="300">
+        <ngx-datatable-column name="Address" [minWidth]="200">
             <ng-template let-row="row" ngx-datatable-cell-template>
                 <span [title]="row.lawyer.address">
                     {{ row.lawyer.address?.length > 10 ? (row.lawyer.address | slice:0:10) + '...' : row.lawyer.address
@@ -49,13 +51,6 @@
                 </span>
             </ng-template>
         </ngx-datatable-column>
-
-        <ngx-datatable-column name="Case Title" [minWidth]="150" [maxWidth]="300">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{ row.case?.title || 'No Case Assigned' }}
-            </ng-template>
-        </ngx-datatable-column>
-
 
         <ngx-datatable-column name="Actions" [width]="250" [canAutoResize]="false" [sortable]="false"
             [draggable]="false">
@@ -71,9 +66,10 @@
                     <button class="btn btn-sm btn-outline-danger" title="delete" (click)="deleteLawyer(row.lawyer.id)">
                         <i class="fas fa-trash-alt"></i>
                     </button>
-                    <!-- <button class="btn btn-sm btn-outline-primary" title="calendar" (click)="calendar(row.lawyer.id)">
+                    <a [routerLink]="['./lawyerCalender',row.lawyer.id]" class="btn btn-sm btn-outline-primary"
+                        title="calendar">
                         <i class="fas fa-calendar-alt"></i>
-                    </button> -->
+                    </a>
                 </div>
             </ng-template>
         </ngx-datatable-column>

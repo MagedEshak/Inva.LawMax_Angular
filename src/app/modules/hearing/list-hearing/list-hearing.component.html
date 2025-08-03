@@ -1,24 +1,25 @@
 <main>
     <section class="">
         <div class="p-3">
-            <h3 class="h3 text-start">Hearings</h3>
+            <h3 class="h4 fw-bold text-dark">Hearings</h3>
 
             <div class="d-flex justify-content-end gap-1">
-                <!-- <button class="btn btn-sm btn-outline-primary" title="calendar" (click)="calendar()">
+                <a [routerLink]="['./calender']" class="btn btn-sm btn-outline-primary" title="calendar">
                     <i class="fas fa-calendar-alt"></i> Hearing Calendar
-                </button> -->
-
-                <a [routerLink]="['./add']" class="btn btn-sm btn-primary" title="add">
-                    <i class="fas fa-plus"></i> Add New Hearing
                 </a>
+
+                <a [routerLink]="['./add']" class="btn btn-sm text-white"
+                    style="background: linear-gradient(to right, #007bff, #0056b3)">
+                    <i class="fas fa-plus me-1"></i> Add New Hearing
+                </a>
+
             </div>
         </div>
     </section>
 
 
-    <ngx-datatable class="bootstrap table-striped shadow-sm p-3" [rows]="hearings" [columnMode]="'force'"
-        [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [loadingIndicator]="isLoading" [limit]="10"
-        style="border-radius: 8px; overflow: hidden;">
+    <ngx-datatable class="" [rows]="hearings" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+        [rowHeight]="50" [loadingIndicator]="isLoading" [limit]="10" style="border-radius: 8px; overflow: hidden;">
 
         <ngx-datatable-column name="Date" prop="date" [width]="150">
             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -32,10 +33,16 @@
             </ng-template>
         </ngx-datatable-column>
 
+        <ngx-datatable-column name="Decision" [width]="300">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.hearing?.decision || '—' }}
+            </ng-template>
+        </ngx-datatable-column>
+
 
         <ngx-datatable-column name="Case Title">
             <ng-template let-row="row" ngx-datatable-cell-template>
-                {{ row.case?.title || 'No case assigned' }}
+                {{ row.case?.caseTitle || 'No case assigned' }}
             </ng-template>
         </ngx-datatable-column>
 
@@ -45,7 +52,8 @@
                     <a [routerLink]="['./edit', row.hearing.id]" class="btn btn-sm btn-outline-warning" title="edit">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <button class="btn btn-sm btn-outline-danger" title="delete" (click)="deleteHearing(row.hearing.id)">
+                    <button class="btn btn-sm btn-outline-danger" title="delete"
+                        (click)="deleteHearing(row.hearing.id)">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </div>

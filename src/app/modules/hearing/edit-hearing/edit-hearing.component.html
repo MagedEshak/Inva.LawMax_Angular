@@ -18,16 +18,12 @@
                         <input type="text" id="location" formControlName="location"
                             class="form-control form-control-lg shadow-sm" placeholder="Enter hearing location" />
                     </div>
-
                     <div class="col-md-12">
-                        <label for="caseId" class="form-label fw-semibold">Assign Case</label>
-                        <select id="caseId" formControlName="caseId" class="form-select form-select-lg shadow-sm">
-                            <option [ngValue]="null">— No Case —</option>
-                            <option *ngFor="let c of availableCases" [ngValue]="c.caseDto.id">
-                                {{ c.caseDto.title }}
-                            </option>
-                        </select>
+                        <label for="location" class="form-label fw-semibold">Hearing Decision</label>
+                        <input type="text" id="decision" formControlName="decision"
+                            class="form-control form-control-lg shadow-sm" placeholder="Enter hearing decision" />
                     </div>
+                    <input type="hidden" formControlName="concurrencyStamp" />
 
                     <div class="d-flex justify-content-between align-items-center mt-5">
                         <button type="button" class="btn btn-outline-secondary btn-lg px-4" (click)="cancel()">

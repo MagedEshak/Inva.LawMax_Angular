@@ -4,13 +4,14 @@ import type { LawyerDto } from '../../../../dtos/lawyer/models';
 
 export interface CaseDto {
   id?: string;
-  number: number;
+  number?: string;
   caseTitle?: string;
   description?: string;
   litigationDegree?: string;
   finalVerdict?: string;
   status?: Status;
   year: number;
+  lawyerID?: string;
   lawyerName?: string;
   lawyerSpeciality?: string;
   creationTime?: string;
@@ -25,7 +26,7 @@ export interface CaseLawyerHearingsWithNavigationProperty {
 }
 
 export interface CreateUpdateCaseDto {
-  number: number;
+  number?: string;
   caseTitle?: string;
   description?: string;
   litigationDegree?: string;

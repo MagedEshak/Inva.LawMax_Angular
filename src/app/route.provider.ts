@@ -28,7 +28,6 @@ function configureRoutes() {
       name: 'Lawyers',
       iconClass: 'fas fa-user',
       layout: eLayoutType.application,
-    //  requiredPolicy: 'LawCases.Lawyer.List',
     },
     {
       path: 'hearing',

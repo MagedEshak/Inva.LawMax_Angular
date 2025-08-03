@@ -1,57 +1,96 @@
 <main class="container py-5">
     <div class="card border-0 shadow-lg rounded-4">
-        <div class="card-header bg-dark text-white py-3 rounded-top-4 d-flex align-items-center">
-            <i class="fas fa-user-edit me-2 fs-4"></i>
-            <h5 class="mb-0">Edit Case Information</h5>
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center rounded-top-4">
+            <h5 class="mb-0">Edit Case</h5>
         </div>
 
-        <div class="card-body px-4 py-4 bg-light rounded-bottom-4">
+        <div class="card-body bg-white px-4 py-5 rounded-bottom-4">
             <form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off">
                 <div class="row g-4">
-                    <!-- Title -->
+
+                    <!-- Case Number -->
                     <div class="col-md-6">
-                        <label for="title" class="form-label fw-semibold">Case Title</label>
-                        <input type="text" id="title" formControlName="title"
-                            class="form-control form-control-lg shadow-sm" placeholder="Enter case title" />
+                        <label class="form-label fw-semibold">Case Number</label>
+                        <input type="text" class="form-control form-control-lg shadow-sm" formControlName="number"
+                            disabled="">
+                        <div class="form-text text-muted mt-1">
+                            ⚠️ This case number is already assigned and cannot be changed.
+                        </div>
+                    </div>
+
+                    <!-- Case Title -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Case Title</label>
+                        <input type="text" class="form-control form-control-lg shadow-sm" formControlName="caseTitle"
+                            placeholder="Enter case title">
                     </div>
 
                     <!-- Description -->
-                    <div class="col-md-6">
-                        <label for="description" class="form-label fw-semibold">Description</label>
-                        <input type="text" id="description" formControlName="description"
-                            class="form-control form-control-lg shadow-sm" placeholder="Case description" />
+                    <div class="col-md-12">
+                        <label class="form-label fw-semibold">Description</label>
+                        <input type="text" class="form-control form-control-lg shadow-sm" formControlName="description"
+                            placeholder="Enter description">
                     </div>
 
-                    <!-- Status -->
+                    <!-- Litigation Degree -->
                     <div class="col-md-6">
-                        <label for="status" class="form-label fw-semibold">Status</label>
-                        <select id="status" class="form-select form-select-lg shadow-sm" formControlName="status">
-                            <option [ngValue]="null" disabled selected>— Select Status —</option>
-                            <option *ngFor="let s of statusOptions" [ngValue]="s.value">
-                                {{ s.label }}
-                            </option>
-                        </select>
+                        <label class="form-label fw-semibold">Litigation Degree</label>
+                        <input type="text" class="form-control form-control-lg shadow-sm"
+                            formControlName="litigationDegree" placeholder="Enter litigation degree">
+                    </div>
+
+                    <!-- Final Verdict -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Final Verdict</label>
+                        <input type="text" class="form-control form-control-lg shadow-sm" formControlName="finalVerdict"
+                            placeholder="Enter final verdict">
+                    </div>
+
+                    <!-- Year -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Year</label>
+                        <input type="number" class="form-control form-control-lg shadow-sm" formControlName="year"
+                            placeholder="Enter year">
+                    </div>
+
+                    <!-- Status (Radio) -->
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold d-block mb-2">Status</label>
+                        <div class="d-flex gap-3">
+                            <div class="form-check status-radio status-open">
+                                <input class="form-check-input" type="radio" id="statusOpen" formControlName="status"
+                                    [value]="0">
+                                <label class="form-check-label" for="statusOpen">New</label>
+                            </div>
+                            <div class="form-check status-radio status-pending">
+                                <input class="form-check-input" type="radio" id="statusPending" formControlName="status"
+                                    [value]="1">
+                                <label class="form-check-label" for="statusPending">Open</label>
+                            </div>
+                            <div class="form-check status-radio status-closed">
+                                <input class="form-check-input" type="radio" id="statusClosed" formControlName="status"
+                                    [value]="2">
+                                <label class="form-check-label" for="statusClosed">Closed</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Lawyer Select-->
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Assigned Lawyer</label>
+                        <input type="text" class="form-control form-control-lg shadow-sm"
+                            [value]="cases?.lawyerDto?.name" readonly />
                     </div>
 
 
-                    <!-- Lawyer -->
-                    <!-- <div class="col-md-6">
-                        <label for="lawyerId" class="form-label fw-semibold">Assign Lawyer</label>
-                        <select id="lawyerId" formControlName="lawyerId" class="form-select form-select-lg shadow-sm">
-                            <option [ngValue]="null" disabled selected>— No Lawyer —</option>
-                            <option *ngFor="let l of availableLawyers" [value]="l.id">{{ l.name }}</option>
-                        </select>
-                    </div> -->
+                    <!-- Hearings Multi-Select -->
+                    <select id="hearingDtos" class="form-select form-select-lg shadow-sm" formControlName="hearingDtos"
+                        multiple size="5">
+                        <option *ngFor="let h of availableHearings" [value]="h.hearing.id">
+                            {{ h.hearing.subject }} — {{ h.hearing.date | date: 'dd/MM/yyyy' }}
+                        </option>
+                    </select>
 
-                    <!-- Hearing -->
-                    <!-- <div class="col-md-6">
-                        <label for="hearingId" class="form-label fw-semibold">Assign Hearing</label>
-                        <select id="hearingId" formControlName="hearingId" class="form-select form-select-lg shadow-sm">
-                            <option [ngValue]="null" disabled selected>— No Hearing —</option>
-                            <option *ngFor="let h of availableHearings" [value]="h.id">{{ h.date | date:'dd/MM/yyyy' }}
-                                - {{ h.location }}</option>
-                        </select>
-                    </div> -->
+
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mt-5">

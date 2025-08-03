@@ -1,58 +1,84 @@
 <main class="container py-5">
     <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
         <!-- Header -->
-        <div class="bg-gradient bg-dark text-white px-4 py-3 d-flex justify-content-between align-items-center">
-            <h4 class="mb-0 d-flex align-items-center">
-
-                Case Details
-            </h4>
-            <a [routerLink]="['/case']" class="btn btn-outline-light btn-sm">
-                <i class="fas fa-arrow-left me-1"></i> Back to List
-            </a>
-        </div>
-
+        <section class="lawyer-info">
+            <div class="px-4 py-3 d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">
+                    <i class="fas fa-gavel me-2"></i> Case Details
+                </h4>
+                <a [routerLink]="['/case']" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-arrow-left me-1"></i> Back to List
+                </a>
+            </div>
+        </section>
         <!-- Body -->
         <div class="bg-white px-5 py-4">
             <div class="row gy-4">
                 <div class="col-md-6">
                     <label class="text-muted small">Title</label>
-                    <div class="fs-5 fw-semibold">{{ case?.caseDto?.title || '—' }}</div>
+                    <div class="fs-5 fw-semibold">{{ case?.caseDto?.caseTitle || '—' }}</div>
                 </div>
                 <div class="col-md-6">
-                    <label class="text-muted small">Lawyer Name</label>
+                    <label class="text-muted small">Lawyer</label>
                     <div class="fs-5 fw-semibold">{{ case?.caseDto?.lawyerName || '—' }}</div>
                 </div>
                 <div class="col-md-6">
                     <label class="text-muted small">Status</label>
-                    <div class="fw-semibold">{{ getStatusLabel(case.caseDto?.status) }}</div>
+                    <div>
+                        <span [ngClass]="getStatusClass(case?.caseDto?.status)">
+                            {{ getStatusLabel(case?.caseDto?.status) }}
+                        </span>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <label class="text-muted small">Created At</label>
-                    <div class="fw-semibold">{{ case.caseDto?.creationTime | date:'mediumDate' }}</div>
+                    <div class="fw-semibold">{{ case?.caseDto?.creationTime | date: 'mediumDate' }}</div>
+                </div>
+                <div class="col-12">
+                    <label class="text-muted small">Description</label>
+                    <div class="fs-6 fw-normal">{{ case?.caseDto?.description || '—' }}</div>
                 </div>
             </div>
         </div>
 
-        <!-- Optional Footer: related case -->
-        <div class="bg-light border-top px-5 py-4">
+        <!-- Hearings -->
+        <div class="bg-light border-top px-5 py-4" *ngIf="case?.hearingDtos?.length > 0">
             <h5 class="text-secondary mb-3">
-                <i class="fas fa-briefcase me-2 text-info"></i> Hearings
+                <i class="fas fa-calendar-alt me-2 text-info"></i> Hearings
             </h5>
-            <div class="row gy-3">
-                <div class="col-md-6">
-                    <label class="text-muted small">Date</label>
-                    <div class="fw-semibold">{{ case?.hearingDtos.date | date:'mediumDate' }}</div>
+            <div class="row gy-4">
+                <div class="col-md-4" *ngFor="let hearing of case.hearingDtos">
+                    <div class="border rounded p-3 bg-white shadow-sm">
+                        <div>
+                            <strong>Date:</strong> {{ hearing.date | date: 'fullDate' }}
+                        </div>
+                        <div>
+                            <strong>Time:</strong> {{ hearing.date | date: 'shortTime' }}
+                        </div>
+                        <div>
+                            <strong>Location:</strong> {{ hearing.location || '—' }}
+                        </div>
+                        <div>
+                            <strong>Decision:</strong>
+                            <p class="mb-0">{{ hearing.decision || '—' }}</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label class="text-muted small">Time</label>
-                    <div class="fw-semibold">{{ case?.hearingDtos.date | date:'shortTime' }}</div>
-                </div>
-                <div class="col-md-12">
-                    <label class="text-muted small">Description</label>
-                    <div class="fs-5 fw-semibold">{{ case?.caseDto?.description || '—' }}</div>
-                </div>
+            </div>
+        </div>
+
+        <!-- Optional Footer Button -->
+        <div class="px-5 py-4 text-end">
+            <div class="px-5 py-4 text-end">
+                <button class="btn btn-gradient btn-sm" [disabled]="!case?.lawyerDto"
+                    [routerLink]="case?.lawyerDto ? ['/lawyer/details', case?.lawyerDto?.id] : null">
+                    <i class="fas fa-user me-1"></i> View Lawyer Profile
+                </button>
+
+                <span *ngIf="!case?.lawyerDto" class="text-danger small ms-2">
+                    No lawyer assigned to this case
+                </span>
             </div>
         </div>
     </div>
-
 </main>

@@ -8,17 +8,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { id } from '@swimlane/ngx-datatable/public-api';
 import { CaseService, HearingService } from 'src/app/proxy/inva/law-cases/controller';
 import { CaseLawyerHearingsWithNavigationProperty } from 'src/app/proxy/inva/law-cases/dtos/case';
-import {
-  HearingDto,
-  HearingWithNavigationPropertyDto,
-} from 'src/app/proxy/inva/law-cases/dtos/hearing';
+import { HearingWithNavigationPropertyDto } from 'src/app/proxy/inva/law-cases/dtos/hearing';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-hearing',
+  standalone: true,
   imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './edit-hearing.component.html',
   styleUrl: './edit-hearing.component.scss',
@@ -26,162 +23,131 @@ import Swal from 'sweetalert2';
 export class EditHearingComponent implements OnInit {
   form: FormGroup;
   isLoading = false;
+
   hearings: HearingWithNavigationPropertyDto | null = null;
   availableCases: CaseLawyerHearingsWithNavigationProperty[] = [];
+  initialCaseTitle: string = '—';
 
   constructor(
     private _hearingService: HearingService,
     private _caseService: CaseService,
-    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router
   ) {
-    this.form = this.formBuilder();
-  }
-  ngOnInit(): void {
-    this.hearingDetails();
+    this.form = this.fb.group({
+      date: ['', Validators.required],
+      location: ['', [Validators.required, Validators.maxLength(200)]],
+      decision: ['', [Validators.required, Validators.maxLength(200)]],
+      concurrencyStamp: [null],
+      caseId: [''], // ✅ أضف هذا لو بتستخدمه لاحقًا
+    });
   }
 
-  hearingDetails() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
+  ngOnInit(): void {
+    this.loadHearingDetails();
+  }
+  private loadHearingDetails(): void {
+    const id = this.route.snapshot.paramMap.get('id');
     if (!id) return;
 
-    const formatDate = (dateString: string): string => {
-      const date = new Date(dateString);
-      return date.toISOString().split('T')[0]; // يحول إلى YYYY-MM-DD
+    this._hearingService.getHearingById(id).subscribe(hearings => {
+      this.hearings = hearings;
+
+      const formattedDate = this.formatDate(hearings.hearing.date);
+
+      this.form.patchValue({
+        ...hearings.hearing,
+        date: formattedDate,
+        concurrencyStamp: hearings.hearing.concurrencyStamp,
+      });
+
+      const caseId = hearings.hearing.caseId;
+      this.form.get('caseId')?.setValue(caseId);
+
+      if (caseId) {
+        this.form.get('caseId')?.disable(); // محكمة مرتبطة → نمنع التغيير
+        this.initialCaseTitle = hearings.case?.caseTitle ?? '—';
+      } else {
+        this.form.get('caseId')?.enable();
+      }
+      this.loadAvailableCases();
+    });
+  }
+
+  private loadAvailableCases(): void {
+    this._caseService
+      .getCaseWithLawyersAndHearingsList({ skipCount: 0, maxResultCount: 1000, sorting: '' })
+      .subscribe(res => {
+        const currentCaseId = this.hearings?.hearing.caseId;
+
+        this.availableCases = res.items.filter(c => {
+          if (c.caseDto.id === currentCaseId) return true; // عرض القضية الحالية
+          return !c.hearingDtos || c.hearingDtos.length === 0;
+        });
+      });
+  }
+
+  private formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  }
+
+  get currentCaseTitle(): string {
+    const caseId = this.hearings?.hearing?.caseId;
+    const matched = this.availableCases.find(c => c.caseDto.id === caseId);
+    return matched?.caseDto?.caseTitle || this.initialCaseTitle || '—';
+  }
+  submit(): void {
+    if (this.form.invalid || !this.form.dirty || !this.hearings) return;
+
+    const updateDto = {
+      ...this.form.value,
+      id: this.hearings.hearing.id,
+      concurrencyStamp: this.form.get('concurrencyStamp')?.value, // ✅ تأكيد الإرسال
     };
 
-    if (id) {
-      this._hearingService.getHearingById(id).subscribe(hearing => {
-        this.hearings = hearing;
+    this.isLoading = true;
 
-        this.form.patchValue({
-          ...hearing.hearing,
-          date: formatDate(hearing.hearing.date),
-          concurrencyStamp: hearing.hearing.concurrencyStamp,
+    this._hearingService.updateHearing(this.hearings.hearing.id, updateDto).subscribe({
+      next: () => {
+        this.isLoading = false;
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Hearing updated successfully!',
+          toast: true,
+          position: 'bottom',
+          showConfirmButton: false,
+          timer: 5000,
+          background: '#166534',
+          color: '#fff',
         });
+        this.router.navigate(['/hearing']);
+      },
+      error: error => {
+        this.isLoading = false;
+        const msg =
+          error.status === 409
+            ? 'Someone else has already modified this record. Please refresh and try again.'
+            : 'Failed to update hearing';
 
-        // this.loadAvilableCases();
-      });
-    }
-  }
-
-  formBuilder(): FormGroup {
-    return (this.form = this.fb.group({
-      date: ['', Validators.required],
-      location: ['', [Validators.maxLength(200), Validators.required]],
-      caseId: [''],
-      concurrencyStamp: [''],
-    }));
-  }
-
-  submit() {
-    if (this.form.invalid || !this.form.dirty || !this.hearings?.hearing.id) {
-      return;
-    }
-
-    if (this.form.valid && this.hearings.hearing.id) {
-      const updateDto = {
-        ...this.form.value,
-        id: this.hearings.hearing.id,
-      };
-
-      const selectedCaseId = this.form.value.caseId;
-      const selectedCase = this.availableCases.find(c => c.caseDto.id === selectedCaseId);
-
-      // if (
-      //   selectedCase &&
-      //   selectedCase.hearingDto &&
-      //   selectedCase.hearingDto.id &&
-      //   selectedCase.hearingDto.id !== this.hearings?.hearing.id
-      // ) {
-      //   Swal.fire({
-      //     icon: 'error',
-      //     title: 'Error',
-      //     text: 'This case is already assigned to another lawyer.',
-      //     toast: true,
-      //     position: 'bottom',
-      //     showConfirmButton: false,
-      //     timer: 4000,
-      //     background: '#651616ff',
-      //     color: '#fff',
-      //     customClass: { popup: 'custom-swal-toast' },
-      //   });
-      //   return;
-      // }
-
-      this.isLoading = true;
-      this._hearingService.updateHearing(this.hearings.hearing.id, updateDto).subscribe({
-        next: () => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: 'Hearing updated successfully!',
-            toast: true,
-            position: 'bottom',
-            showConfirmButton: false,
-            timer: 5000,
-            background: '#166534',
-            color: '#fff',
-            customClass: {
-              popup: 'custom-swal-toast',
-            },
-          });
-
-          this.isLoading = false;
-          this.router.navigate(['./hearing']);
-        },
-        error: error => {
-          this.isLoading = false;
-          if (error.status === 409) {
-            Swal.fire({
-              icon: 'error',
-              title: 'error',
-              text: 'Someone else has already modified this record. Please refresh and try again.!',
-              toast: true,
-              position: 'bottom',
-              showConfirmButton: false,
-              timer: 5000,
-              background: '#651616ff',
-              color: '#fff',
-              customClass: {
-                popup: 'custom-swal-toast',
-              },
-            });
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'error',
-              text: 'Failed to update hearing',
-              toast: true,
-              position: 'bottom',
-              showConfirmButton: false,
-              timer: 5000,
-              background: '#651616ff',
-              color: '#fff',
-              customClass: {
-                popup: 'custom-swal-toast',
-              },
-            });
-          }
-        },
-      });
-    }
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: msg,
+          toast: true,
+          position: 'bottom',
+          showConfirmButton: false,
+          timer: 5000,
+          background: '#651616ff',
+          color: '#fff',
+        });
+      },
+    });
   }
 
   cancel(): void {
-    history.back();
+    this.router.navigate(['/hearing']);
   }
-
-  // loadAvilableCases(): void {
-  //   this._caseService
-  //     .getCaseWithLawyersAndHearingsList({ skipCount: 0, maxResultCount: 1000, sorting: '' })
-  //     .subscribe(res => {
-  //       const currentLawyerCaseId = this.hearings?.hearing.caseId;
-
-  //       this.availableCases = res.items.filter(
-  //         c => !c.hearingDtos?.id || c.hearingDtos.id === this.hearings?.hearing.id
-  //       );
-  //     });
-  // }
 }

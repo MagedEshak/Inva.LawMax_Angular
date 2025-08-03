@@ -27,6 +27,14 @@ export class CaseService {
     { apiName: this.apiName,...config });
   
 
+  getCaseById = (caseGuid: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, CaseDto>({
+      method: 'GET',
+      url: `/api/Case/CaseById/${caseGuid}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   getCaseWithLawyersAndHearingsById = (caseGuid: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, CaseLawyerHearingsWithNavigationProperty>({
       method: 'GET',
@@ -40,6 +48,15 @@ export class CaseService {
       method: 'GET',
       url: '/api/Case/GetCaseWithLawyers',
       params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getList = (input: PagedAndSortedResultRequestDto, date: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, PagedResultDto<CaseDto>>({
+      method: 'GET',
+      url: '/api/Case/Cases',
+      params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount, date },
     },
     { apiName: this.apiName,...config });
   

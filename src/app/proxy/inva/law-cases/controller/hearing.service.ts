@@ -35,6 +35,14 @@ export class HearingService {
     { apiName: this.apiName,...config });
   
 
+  getHearingsByLawyer = (lawyerId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, HearingDto[]>({
+      method: 'GET',
+      url: `/api/Hearing/hearingsByLawyerId/${lawyerId}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   getList = (input: PagedAndSortedResultRequestDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<HearingWithNavigationPropertyDto>>({
       method: 'GET',

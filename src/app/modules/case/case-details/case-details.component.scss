@@ -1,0 +1,111 @@
+.lawyer-card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.lawyer-info,
+.case-list,
+.case-details {
+    margin-bottom: 2rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    .full-width {
+        grid-column: span 2;
+    }
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    th {
+        background-color: #f8f9fa;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+}
+
+.case-details {
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border-left: 5px solid #0dcaf0;
+    border-radius: 0.5rem;
+    animation: slideIn 0.4s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.badge {
+    padding: 0.4em 0.7em;
+    border-radius: 0.25rem;
+    font-size: 0.85em;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.badge-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.badge-light {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.btn-gradient {
+    background: linear-gradient(to right, #198754, #14532d); // من الأخضر إلى الزيتي
+    color: #fff;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-gradient:hover {
+    background: linear-gradient(to right, #14532d, #0f3e23);
+    color: #fff;
+}

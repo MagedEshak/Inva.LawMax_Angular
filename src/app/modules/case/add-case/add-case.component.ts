@@ -48,11 +48,16 @@ export class AddCaseComponent implements OnInit {
       }));
 
     this.form = this.fb.group({
-      title: ['', [Validators.maxLength(100), Validators.required]],
-      description: ['', [Validators.maxLength(100), Validators.required]],
-      status: ['', Validators.required],
-      lawyerId: [''],
-      hearingId: [''],
+      number: ['', [Validators.required, Validators.maxLength(50)]],
+      caseTitle: ['', [Validators.required, Validators.maxLength(200)]],
+      description: ['', [Validators.maxLength(1000)]],
+      litigationDegree: ['', [Validators.maxLength(1000)]],
+      finalVerdict: ['', [Validators.maxLength(1000)]],
+      year: [null, [Validators.required]],
+      status: [null, [Validators.required]],
+      lawyerId: [null, [Validators.required]],
+      hearingDtos: [[]],
+      concurrencyStamp: [null], // default value = empty array
     });
 
     this.loadAvailableLawyers();
@@ -64,7 +69,9 @@ export class AddCaseComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
+
     this.isLoading = true;
+    console.log('Payload:', this.form.value);
     this._caseService.createCase(this.form.value).subscribe({
       next: () => {
         Swal.fire({
@@ -105,7 +112,7 @@ export class AddCaseComponent implements OnInit {
   }
   loadAvailableLawyers() {
     this._lawyerService.getList({ skipCount: 0, maxResultCount: 1000 }).subscribe(res => {
-      this.availableLawyers = res.items.filter(l => !l.lawyer.cases);
+      this.availableLawyers = res.items;
     });
   }
 

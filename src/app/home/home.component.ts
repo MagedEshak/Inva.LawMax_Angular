@@ -6,17 +6,24 @@ import { CaseService, DashboardService } from '../proxy/inva/law-cases/controlle
 import { CaseByMonthDto, CaseStatusNumberDto } from '../proxy/inva/law-cases/dtos/dashboard';
 import { Status } from '../proxy/inva/law-cases/enums';
 import { CaseLawyerHearingsWithNavigationProperty } from '../proxy/inva/law-cases/dtos/case';
+import { Router, RouterLink } from '@angular/router';
 
 Chart.register(...registerables);
 @Component({
-  imports: [DatePipe, CommonModule],
+  imports: [DatePipe, CommonModule, RouterLink],
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   cases: CaseLawyerHearingsWithNavigationProperty[] = [];
-  todayHearings: CaseLawyerHearingsWithNavigationProperty[] = [];
+  todayHearings: {
+    caseId: string;
+    caseTitle: string;
+    lawyerName: string;
+    date: string;
+    location: string;
+  }[] = [];
 
   statusesCount: CaseStatusNumberDto[] = [];
   openStatusCount = 0;
@@ -30,7 +37,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private _dashboardService: DashboardService,
-    private caseService: CaseService
+    private caseService: CaseService,
+    private router: Router
   ) {
     this.loadCasesByStatus();
     this.loadCasesByMonth();
@@ -43,7 +51,9 @@ export class HomeComponent implements OnInit {
     this.loadOpenCasesByStatus();
     this.caseDetails();
   }
-
+  goToCaseDetails(caseId: string) {
+    this.router.navigate(['/case/details', caseId]); // عدّل المسار حسب المسار الحقيقي عندك
+  }
   loadOpenCasesByStatus() {
     this._dashboardService.getListOfCaseStatusNumber().subscribe(data => {
       this.statusesCount = data;
@@ -74,7 +84,7 @@ export class HomeComponent implements OnInit {
             {
               label: 'Cases by Status',
               data: values,
-              backgroundColor: ['#0d6efd','#198754','#dc3545' ],
+              backgroundColor: ['#0d6efd', '#198754', '#dc3545'],
             },
           ],
         },
@@ -113,11 +123,24 @@ export class HomeComponent implements OnInit {
       .subscribe(response => {
         this.cases = response.items;
 
-        // this.todayHearings = this.cases.filter(c => {
-        //   // const hearingDate = c.hearingDtos?.date.split('T')[0]; // YYYY-MM-DD
-        //   const hearingDate = c.hearingDtos.;
-        //   return hearingDate === today;
-        // });
+        this.todayHearings = [];
+
+        this.cases.forEach(c => {
+          const hearings = c.caseDto?.hearingDtos || [];
+
+          hearings.forEach(h => {
+            const hearingDate = h.date?.split('T')[0];
+            if (hearingDate === today) {
+              this.todayHearings.push({
+                caseId: c.caseDto?.id!,
+                caseTitle: c.caseDto?.caseTitle || 'N/A',
+                lawyerName: c.lawyerDto?.name || 'N/A',
+                date: h.date,
+                location: h.location,
+              });
+            }
+          });
+        });
       });
   }
 }

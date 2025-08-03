@@ -1,6 +1,7 @@
 import { PagedAndSortedResultRequestDto } from '@abp/ng.core';
-import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CaseService } from 'src/app/proxy/inva/law-cases/controller';
@@ -10,9 +11,10 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-case',
-  imports: [NgxDatatableModule, RouterLink, DatePipe],
+  imports: [NgxDatatableModule, RouterLink, CommonModule],
   templateUrl: './list-case.component.html',
   styleUrl: './list-case.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class ListCaseComponent implements OnInit {
   cases: CaseLawyerHearingsWithNavigationProperty[] = [];
@@ -120,5 +122,16 @@ export class ListCaseComponent implements OnInit {
     return desc.length > 10 ? desc.slice(0, 10) + '...' : desc;
   }
 
-  calendar() {}
+  getStatusClass(status: number | undefined): string {
+    switch (status) {
+      case 0:
+        return 'text-primary'; // مثلاً: Draft
+      case 1:
+        return 'text-warning'; // مثلاً: Open
+      case 2:
+        return 'text-danger'; // مثلاً: Completed
+      default:
+        return 'text-dark'; // حالة غير معروفة
+    }
+  }
 }

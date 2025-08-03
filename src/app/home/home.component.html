@@ -44,44 +44,46 @@
     </div>
 
 
-<!-- Today's Hearings Card -->
-<div class="card shadow-lg border-0 rounded-4 mt-5" *ngIf="todayHearings.length > 0">
-    <div class="card-header bg-success text-white fw-semibold rounded-top-4 d-flex align-items-center">
-        <i class="fas fa-calendar-check me-2 fs-5"></i> Today's Hearings
-    </div>
-    <div class="card-body p-4 bg-light rounded-bottom-4">
-        <div class="table-responsive rounded-3">
-            <table class="table table-hover table-bordered text-center align-middle mb-0 shadow-sm bg-white">
-                <thead class="table-success text-dark">
-                    <tr>
-                        <th scope="col"><i class="fas fa-file-alt me-1"></i> Case</th>
-                        <th scope="col"><i class="fas fa-user-tie me-1"></i> Lawyer</th>
-                        <th scope="col"><i class="fas fa-clock me-1"></i> Hearing Date</th>
-                        <th scope="col"><i class="fas fa-map-marker-alt me-1"></i> Location</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of todayHearings">
-                        <td class="fw-semibold">{{ item.caseDto?.title }}</td>
-                        <td>{{ item.lawyerDto?.name }}</td>
-                        <td>
-                            <span class="badge bg-primary fs-6">
-                                {{ item.hearingDto?.date | date: 'dd/MM/yyyy' }}
-                            </span>
-                        </td>
-                        <td>{{ item.hearingDto?.location }}</td>
-                    </tr>
-                </tbody>
-            </table>
+    <!-- Today's Hearings Card -->
+    <!-- Today's Hearings Card -->
+    <div class="card shadow-lg border-0 rounded-4 mt-5" *ngIf="todayHearings.length > 0">
+        <div class="card-header bg-success text-white fw-semibold rounded-top-4 d-flex align-items-center">
+            <i class="fas fa-calendar-check me-2 fs-5"></i> Today's Hearings
+        </div>
+        <div class="card-body p-4 bg-light rounded-bottom-4">
+            <div class="table-responsive rounded-3">
+                <table class="table table-hover table-bordered text-center align-middle mb-0 shadow-sm bg-white">
+                    <thead class="table-success text-dark">
+                        <tr>
+                            <th><i class="fas fa-file-alt me-1"></i> Case</th>
+                            <th><i class="fas fa-user-tie me-1"></i> Lawyer</th>
+                            <th><i class="fas fa-clock me-1"></i> Hearing Date</th>
+                            <th><i class="fas fa-map-marker-alt me-1"></i> Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of todayHearings" style="cursor: pointer"
+                            (click)="goToCaseDetails(item.caseId)">
+                            <td class="fw-semibold text-primary">{{ item.caseTitle }}</td>
+                            <td>{{ item.lawyerName }}</td>
+                            <td>
+                                <span class="badge bg-primary fs-6">
+                                    {{ item.date | date: 'dd/MM/yyyy' }}
+                                </span>
+                            </td>
+                            <td>{{ item.location }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- No Hearings Message -->
-<div *ngIf="todayHearings.length === 0" class="text-center mt-5 text-muted">
-    <i class="fas fa-info-circle me-2 text-secondary"></i>
-    No hearings scheduled for today.
-</div>
+    <!-- No Hearings Message -->
+    <div *ngIf="todayHearings.length === 0" class="text-center mt-5 text-muted">
+        <i class="fas fa-info-circle me-2 text-secondary"></i>
+        No hearings scheduled for today.
+    </div>
 
 
 </main>

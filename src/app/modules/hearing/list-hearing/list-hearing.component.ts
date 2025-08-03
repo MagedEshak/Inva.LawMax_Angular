@@ -1,7 +1,9 @@
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { HearingDto, HearingWithNavigationPropertyDto } from 'src/app/proxy/inva/law-cases/dtos/hearing';
+import {
+  HearingWithNavigationPropertyDto,
+} from 'src/app/proxy/inva/law-cases/dtos/hearing';
 import { PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import { HearingService } from 'src/app/proxy/inva/law-cases/controller';
 import Swal from 'sweetalert2';
@@ -12,6 +14,7 @@ import { DatePipe } from '@angular/common';
   imports: [NgxDatatableModule, RouterLink, DatePipe],
   templateUrl: './list-hearing.component.html',
   styleUrl: './list-hearing.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class ListHearingComponent implements OnInit {
   hearings: HearingWithNavigationPropertyDto[] = [];
@@ -81,7 +84,7 @@ export class ListHearingComponent implements OnInit {
               position: 'bottom',
               showConfirmButton: false,
               timer: 4000,
-              background: '#166534',
+              background: '#651616',
               color: '#fff',
               customClass: {
                 popup: 'custom-swal-toast',

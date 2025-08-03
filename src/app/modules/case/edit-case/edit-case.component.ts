@@ -1,4 +1,5 @@
-import { CommonModule } from '@angular/common';
+import { HearingDto } from './../../../proxy/inva/law-cases/dtos/hearing/models';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -9,14 +10,20 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { id } from '@swimlane/ngx-datatable/public-api';
-import { CaseService, LawyerService } from 'src/app/proxy/inva/law-cases/controller';
+import {
+  CaseService,
+  HearingService,
+  LawyerService,
+} from 'src/app/proxy/inva/law-cases/controller';
 import { CaseLawyerHearingsWithNavigationProperty } from 'src/app/proxy/inva/law-cases/dtos/case';
+import { HearingWithNavigationPropertyDto } from 'src/app/proxy/inva/law-cases/dtos/hearing';
+import { LawyerWithNavigationPropertyDto } from 'src/app/proxy/inva/law-cases/dtos/lawyer';
 import { Status } from 'src/app/proxy/inva/law-cases/enums';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-case',
-  imports: [ReactiveFormsModule, FormsModule, CommonModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, DatePipe],
   templateUrl: './edit-case.component.html',
   styleUrl: './edit-case.component.scss',
 })
@@ -25,27 +32,40 @@ export class EditCaseComponent implements OnInit {
   statusOptions: { value: Status; label: string }[] = [];
   form: FormGroup;
   isLoading = false;
+  availableLawyers: LawyerWithNavigationPropertyDto[] = [];
+  availableHearings: HearingWithNavigationPropertyDto[] = [];
 
   constructor(
     private _caseService: CaseService,
+    private _lawyerService: LawyerService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private _hearingService: HearingService
   ) {}
 
   ngOnInit(): void {
-    this.statusOptions = this.getStatusOptions();
+    this.statusOptions = Object.keys(Status)
+      .filter(key => !isNaN(Number(Status[key as any])))
+      .map(key => ({
+        value: Status[key as keyof typeof Status],
+        label: key,
+      }));
 
     this.form = this.fb.group({
-      title: ['', [Validators.maxLength(100), Validators.required]],
-      description: ['', [Validators.maxLength(100), Validators.required]],
-      status: ['', Validators.required],
-      lawyerId: [''],
-      hearingId: [''],
-      concurrencyStamp: [''],
+      number: ['', [Validators.required, Validators.maxLength(50)]],
+      caseTitle: ['', [Validators.required, Validators.maxLength(200)]],
+      description: ['', [Validators.maxLength(1000)]],
+      litigationDegree: ['', [Validators.maxLength(1000)]],
+      finalVerdict: ['', [Validators.maxLength(1000)]],
+      year: [null, [Validators.required]],
+      status: [null, [Validators.required]],
+      lawyerId: [null],
+      hearingDtos: [[]],
+      concurrencyStamp: [null],
     });
 
-    this.caseDetails();
+    this.caseDetails(); // 🟢 هذا يستدعي تحميل المحامي/الجلسات بعد الاستعلام
   }
 
   getStatusOptions(): { value: Status; label: string }[] {
@@ -63,10 +83,18 @@ export class EditCaseComponent implements OnInit {
 
     this._caseService.getCaseWithLawyersAndHearingsById(id).subscribe(cases => {
       this.cases = cases;
+
+      // تعبئة النموذج
       this.form.patchValue({
         ...cases.caseDto,
+        lawyerId: cases.lawyerDto?.id ?? null, // ✅ من العلاقة الخارجية
+        hearingDtos: cases.hearingDtos?.map(h => h.id) ?? [],
         concurrencyStamp: cases.caseDto.concurrencyStamp,
       });
+
+      // بعد تحميل البيانات كاملة، حمّل الاختيارات
+      this.loadAvailableLawyers();
+      this.loadAvailableHearings();
     });
   }
 
@@ -118,6 +146,24 @@ export class EditCaseComponent implements OnInit {
 
         if (isConflict) this.caseDetails();
       },
+    });
+  }
+  loadAvailableLawyers() {
+    const currentLawyerId = this.cases?.lawyerDto?.id;
+
+    this._lawyerService.getList({ skipCount: 0, maxResultCount: 1000 }).subscribe(res => {
+      const allLawyers = res.items;
+    });
+  }
+
+  loadAvailableHearings() {
+    const currentCaseId = this.cases?.caseDto?.id;
+
+    this._hearingService.getList({ skipCount: 0, maxResultCount: 1000 }).subscribe(res => {
+      this.availableHearings = res.items.filter(h => {
+        // عرض الجلسات المرتبطة بالقضية الحالية أو اللي مالهاش قضية
+        return !h.hearing.caseId || h.hearing.caseId === currentCaseId;
+      });
     });
   }
 

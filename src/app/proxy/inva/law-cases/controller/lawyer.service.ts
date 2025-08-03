@@ -11,6 +11,24 @@ export class LawyerService {
   apiName = 'Default';
   
 
+  checkEmail = (email: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, boolean>({
+      method: 'GET',
+      url: '/api/Lawyer/check-email',
+      params: { email },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  checkPhone = (phone: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, boolean>({
+      method: 'GET',
+      url: '/api/Lawyer/check-phone',
+      params: { phone },
+    },
+    { apiName: this.apiName,...config });
+  
+
   create = (input: CreateUpdateLawyerDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, LawyerDto>({
       method: 'POST',
@@ -28,10 +46,11 @@ export class LawyerService {
     { apiName: this.apiName,...config });
   
 
-  get = (id: string, config?: Partial<Rest.Config>) =>
+  get = (id: string, date?: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, LawyerWithNavigationPropertyDto>({
       method: 'GET',
       url: `/api/Lawyer/${id}`,
+      params: { date },
     },
     { apiName: this.apiName,...config });
   

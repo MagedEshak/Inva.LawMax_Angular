@@ -5,6 +5,7 @@ import { AddLawyerComponent } from './add-lawyer/add-lawyer.component';
 import { LawyerDetailsComponent } from './lawyer-details/lawyer-details.component';
 import { authGuard } from '@abp/ng.core';
 import { EditLawyerComponent } from './edit-lawyer/edit-lawyer.component';
+import { LawyerCalenderComponent } from './lawyer-calender/lawyer-calender.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,12 @@ const routes: Routes = [
     path: 'edit/:id',
     pathMatch: 'full',
     component: EditLawyerComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'lawyerCalender/:id',
+    pathMatch: 'full',
+    component: LawyerCalenderComponent,
     canActivate: [authGuard],
   },
 ];

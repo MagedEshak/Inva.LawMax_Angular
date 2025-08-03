@@ -24,6 +24,12 @@ const routes: Routes = [
     component: EditHearingComponent,
     canActivate: [authGuard],
   },
+  {
+    path: 'calender',
+    pathMatch: 'full',
+    component: HearingDetailsComponent,
+    canActivate: [authGuard],
+  },
 ];
 
 @NgModule({

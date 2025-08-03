@@ -9,52 +9,33 @@
             <form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off">
                 <div class="row g-4">
                     <div class="col-md-6">
-                        <label for="name" class="form-label fw-semibold">Full Name</label>
-                        <input type="text" id="name" formControlName="name"
-                            class="form-control form-control-lg shadow-sm" placeholder="Enter full name" />
+                        <label class="form-label fw-semibold">Full Name</label>
+                        <input type="text" formControlName="name" class="form-control form-control-lg shadow-sm" />
                     </div>
                     <div class="col-md-6">
-                        <label for="email" class="form-label fw-semibold">Email Address</label>
-                        <input type="email" id="email" formControlName="email"
-                            class="form-control form-control-lg shadow-sm" placeholder="Enter email" />
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="phone" class="form-label fw-semibold">Phone Number</label>
-                        <input type="text" id="phone" formControlName="phone"
-                            class="form-control form-control-lg shadow-sm" placeholder="Enter phone number" />
+                        <label class="form-label fw-semibold">Email</label>
+                        <input type="email" formControlName="email" class="form-control form-control-lg shadow-sm" />
                     </div>
                     <div class="col-md-6">
-                        <label for="speciality" class="form-label fw-semibold">Speciality</label>
-                        <input type="text" id="speciality" formControlName="speciality"
-                            class="form-control form-control-lg shadow-sm" placeholder="e.g., Criminal, Civil..." />
+                        <label class="form-label fw-semibold">Phone</label>
+                        <input type="text" formControlName="phone" class="form-control form-control-lg shadow-sm" />
                     </div>
-
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Speciality</label>
+                        <input type="text" formControlName="speciality"
+                            class="form-control form-control-lg shadow-sm" />
+                    </div>
                     <div class="col-md-12">
-                        <label for="address" class="form-label fw-semibold">Address</label>
-                        <input type="text" id="address" formControlName="address"
-                            class="form-control form-control-lg shadow-sm" placeholder="Enter address" />
+                        <label class="form-label fw-semibold">Address</label>
+                        <input type="text" formControlName="address" class="form-control form-control-lg shadow-sm" />
                     </div>
-
-                    <div class="col-md-12">
-                        <label for="caseId" class="form-label fw-semibold">Assign Case </label>
-                        <select id="caseId" formControlName="caseId" class="form-select form-select-lg shadow-sm">
-                            <option [ngValue]="null">— No Case —</option>
-                            <option *ngFor="let c of availableCases" [ngValue]="c.caseDto.id">
-                                {{ c.caseDto.title }}
-                            </option>
-                        </select>
-                    </div>
-
-
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mt-5">
                     <button type="button" class="btn btn-outline-secondary btn-lg px-4" (click)="cancel()">
                         <i class="fas fa-arrow-left me-2"></i> Cancel
                     </button>
-                    <button type="submit" class="btn btn-success btn-lg px-5"
-                        [disabled]="form.invalid || !form.dirty || isLoading">
+                    <button type="submit" class="btn btn-success btn-lg px-5" [disabled]="form.invalid || isLoading">
                         <ng-container *ngIf="!isLoading; else loading">
                             <i class="fas fa-save me-2"></i> Save Changes
                         </ng-container>
@@ -62,10 +43,26 @@
                             <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                             Saving...
                         </ng-template>
-                        Edit
                     </button>
                 </div>
             </form>
+        </div>
+
+        <div class="px-4 py-4 border-top bg-white">
+            <h5 class="mb-3 text-dark fw-semibold">
+                <i class="fas fa-briefcase me-2 text-info"></i> Assigned Cases
+            </h5>
+
+            <ul class="list-group">
+                <li *ngFor="let c of lawyer?.cases" class="list-group-item d-flex justify-content-start">
+                    <span class="fw-semibold">{{ c.caseTitle }} </span>
+                    <span class="badge ms-auto" [ngClass]="getStatusClass(c.status)">
+                        {{ getStatusLabel(c.status) }}
+                    </span>
+                </li>
+            </ul>
+
+            <div *ngIf="!lawyer?.cases?.length" class="text-muted mt-3">No cases assigned to this lawyer.</div>
         </div>
     </section>
 </main>

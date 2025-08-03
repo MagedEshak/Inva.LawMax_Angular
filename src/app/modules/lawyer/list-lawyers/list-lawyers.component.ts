@@ -11,7 +11,7 @@ import { LawyerWithNavigationPropertyDto } from 'src/app/proxy/inva/law-cases/dt
   selector: 'app-list-lawyers',
   imports: [NgxDatatableModule, CommonModule, RouterLink],
   templateUrl: './list-lawyers.component.html',
-  styleUrl: './list-lawyers.component.css',
+  styleUrl: './list-lawyers.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
 export class ListLawyersComponent implements OnInit {

@@ -962,6 +962,48 @@
                   }
                 },
                 {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
+                      "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                      "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "date",
+                      "typeAsString": "System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                      "type": "System.DateTime?",
+                      "typeSimple": "string?",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<Inva.LawCases.DTOs.Case.CaseDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Inva.LawCases.DTOs.Case.CaseDto>"
+                  }
+                },
+                {
+                  "name": "GetCaseByIdAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "caseGuid",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Inva.LawCases.DTOs.Case.CaseDto",
+                    "typeSimple": "Inva.LawCases.DTOs.Case.CaseDto"
+                  }
+                },
+                {
                   "name": "DeleteCaseAsync",
                   "parametersOnMethod": [
                     {
@@ -1076,6 +1118,124 @@
               "returnValue": {
                 "type": "Inva.LawCases.DTOs.Case.CaseLawyerHearingsWithNavigationProperty",
                 "typeSimple": "Inva.LawCases.DTOs.Case.CaseLawyerHearingsWithNavigationProperty"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Inva.LawCases.Interfaces.ICaseAppService"
+            },
+            "GetListAsyncByInputAndDate": {
+              "uniqueName": "GetListAsyncByInputAndDate",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/Case/Cases",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
+                  "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "date",
+                  "typeAsString": "System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Query",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Query",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Query",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "date",
+                  "name": "date",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Query",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<Inva.LawCases.DTOs.Case.CaseDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Inva.LawCases.DTOs.Case.CaseDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Inva.LawCases.Interfaces.ICaseAppService"
+            },
+            "GetCaseByIdAsyncByCaseGuid": {
+              "uniqueName": "GetCaseByIdAsyncByCaseGuid",
+              "name": "GetCaseByIdAsync",
+              "httpMethod": "GET",
+              "url": "api/Case/CaseById/{caseGuid}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "caseGuid",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "caseGuid",
+                  "name": "caseGuid",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Inva.LawCases.DTOs.Case.CaseDto",
+                "typeSimple": "Inva.LawCases.DTOs.Case.CaseDto"
               },
               "allowAnonymous": false,
               "implementFrom": "Inva.LawCases.Interfaces.ICaseAppService"
@@ -1366,6 +1526,23 @@
                   }
                 },
                 {
+                  "name": "GetHearingsByLawyerAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "lawyerId",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Collections.Generic.List<Inva.LawCases.DTOs.Hearing.HearingDto>",
+                    "typeSimple": "[Inva.LawCases.DTOs.Hearing.HearingDto]"
+                  }
+                },
+                {
                   "name": "DeleteHearingAsync",
                   "parametersOnMethod": [
                     {
@@ -1480,6 +1657,43 @@
               "returnValue": {
                 "type": "Inva.LawCases.DTOs.Hearing.HearingWithNavigationPropertyDto",
                 "typeSimple": "Inva.LawCases.DTOs.Hearing.HearingWithNavigationPropertyDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Inva.LawCases.Interfaces.IHearingAppService"
+            },
+            "GetHearingsByLawyerAsyncByLawyerId": {
+              "uniqueName": "GetHearingsByLawyerAsyncByLawyerId",
+              "name": "GetHearingsByLawyerAsync",
+              "httpMethod": "GET",
+              "url": "api/Hearing/hearingsByLawyerId/{lawyerId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "lawyerId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "lawyerId",
+                  "name": "lawyerId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<Inva.LawCases.DTOs.Hearing.HearingDto>",
+                "typeSimple": "[Inva.LawCases.DTOs.Hearing.HearingDto]"
               },
               "allowAnonymous": false,
               "implementFrom": "Inva.LawCases.Interfaces.IHearingAppService"
@@ -1626,8 +1840,8 @@
           "type": "Inva.LawCases.Controller.LawyerController",
           "interfaces": [],
           "actions": {
-            "GetAsyncById": {
-              "uniqueName": "GetAsyncById",
+            "GetAsyncByIdAndDate": {
+              "uniqueName": "GetAsyncByIdAndDate",
               "name": "GetAsync",
               "httpMethod": "GET",
               "url": "api/Lawyer/{id}",
@@ -1638,6 +1852,14 @@
                   "typeAsString": "System.Guid, System.Private.CoreLib",
                   "type": "System.Guid",
                   "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "date",
+                  "typeAsString": "System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
                   "isOptional": false,
                   "defaultValue": null
                 }
@@ -1653,6 +1875,18 @@
                   "defaultValue": null,
                   "constraintTypes": [],
                   "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "date",
+                  "name": "date",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Query",
                   "descriptorName": ""
                 }
               ],
@@ -1720,6 +1954,80 @@
               "returnValue": {
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<Inva.LawCases.DTOs.Lawyer.LawyerWithNavigationPropertyDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Inva.LawCases.DTOs.Lawyer.LawyerWithNavigationPropertyDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Inva.LawCases.Controller.LawyerController"
+            },
+            "CheckEmailAsyncByEmail": {
+              "uniqueName": "CheckEmailAsyncByEmail",
+              "name": "CheckEmailAsync",
+              "httpMethod": "GET",
+              "url": "api/Lawyer/check-email",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "email",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "email",
+                  "name": "email",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Query",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Inva.LawCases.Controller.LawyerController"
+            },
+            "CheckPhoneAsyncByPhone": {
+              "uniqueName": "CheckPhoneAsyncByPhone",
+              "name": "CheckPhoneAsync",
+              "httpMethod": "GET",
+              "url": "api/Lawyer/check-phone",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "phone",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "phone",
+                  "name": "phone",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Query",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
               },
               "allowAnonymous": false,
               "implementFrom": "Inva.LawCases.Controller.LawyerController"
@@ -4934,8 +5242,8 @@
         {
           "name": "Number",
           "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
+          "type": "System.String",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5008,6 +5316,18 @@
           "jsonName": null,
           "type": "System.Int32",
           "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "LawyerID",
+          "jsonName": null,
+          "type": "System.Guid?",
+          "typeSimple": "string?",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5132,8 +5452,8 @@
         {
           "name": "Number",
           "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
+          "type": "System.String",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -5446,6 +5766,66 @@
           "jsonName": null,
           "type": "System.Guid",
           "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CaseTitle",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CaseDescription",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CaseLitigationDegree",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CaseFinalVerdict",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CaseStatus",
+          "jsonName": null,
+          "type": "Inva.LawCases.Enums.Status",
+          "typeSimple": "enum",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,

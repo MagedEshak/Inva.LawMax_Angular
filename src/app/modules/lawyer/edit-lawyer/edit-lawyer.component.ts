@@ -8,105 +8,122 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { CaseService, LawyerService } from 'src/app/proxy/inva/law-cases/controller';
-import {
-  CaseDto,
-  CaseLawyerHearingsWithNavigationProperty,
-} from 'src/app/proxy/inva/law-cases/dtos/case';
+import { LawyerService } from 'src/app/proxy/inva/law-cases/controller';
 import { LawyerWithNavigationPropertyDto } from 'src/app/proxy/inva/law-cases/dtos/lawyer';
+import { statusOptions } from 'src/app/proxy/inva/law-cases/enums';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-edit-lawyer',
-  imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './edit-lawyer.component.html',
   styleUrl: './edit-lawyer.component.scss',
+  standalone: true,
+  imports: [ReactiveFormsModule, FormsModule, CommonModule],
 })
 export class EditLawyerComponent implements OnInit {
   lawyer: LawyerWithNavigationPropertyDto | null = null;
-  availableCases: CaseLawyerHearingsWithNavigationProperty[] = [];
-
   form: FormGroup;
   isLoading = false;
+
   constructor(
-    private _lawyerService: LawyerService,
-    private _caseService: CaseService,
-    private route: ActivatedRoute,
     private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private _lawyerService: LawyerService,
     private router: Router
   ) {
-    this.form = this.gettingForm();
-  }
-
-  ngOnInit(): void {
-    this.lawyerDetails();
-  }
-
-  gettingForm(): FormGroup {
-    return this.fb.group({
-      name: [[null], [Validators.maxLength(100), Validators.required]],
-      email: ['', [Validators.maxLength(100), Validators.required, Validators.email]],
-      phone: [
-        '',
-        [Validators.maxLength(100), Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')],
-      ],
-      address: ['', [Validators.maxLength(200), Validators.required]],
-      caseId: [''],
+    this.form = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(100)]],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
+      phone: ['', [Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')]],
+      address: ['', [Validators.required, Validators.maxLength(200)]],
       speciality: ['', [Validators.maxLength(100)]],
       concurrencyStamp: [''],
     });
   }
 
-  lawyerDetails(): void {
+  ngOnInit(): void {
+    this.loadLawyerDetails();
+  }
+
+  loadLawyerDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) return;
 
     this._lawyerService.get(id).subscribe(lawyers => {
       this.lawyer = lawyers;
+
       this.form.patchValue({
         ...lawyers.lawyer,
         concurrencyStamp: lawyers.lawyer.concurrencyStamp,
       });
-      this.loadAvilableCases(); // ✅ دي لازم تبقى هنا
     });
   }
 
-  submit() {
-    if (this.form.invalid || !this.form.dirty || !this.lawyer.lawyer.id) {
-      return;
-    }
-    const selectedCaseId = this.form.value.caseId;
-    const selectedCase = this.availableCases.find(c => c.caseDto.id === selectedCaseId);
+  submit(): void {
+    if (this.form.invalid || !this.form.dirty || !this.lawyer?.lawyer.id) return;
 
-    if (
-      selectedCase &&
-      selectedCase.lawyerDto &&
-      selectedCase.lawyerDto.id &&
-      selectedCase.lawyerDto.id !== this.lawyer?.lawyer.id
-    ) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'This case is already assigned to another lawyer.',
-        toast: true,
-        position: 'bottom',
-        showConfirmButton: false,
-        timer: 4000,
-        background: '#651616ff',
-        color: '#fff',
-        customClass: { popup: 'custom-swal-toast' },
-      });
-      return;
+    const updateDto = {
+      ...this.form.value,
+      id: this.lawyer.lawyer.id,
+    };
+
+    const { email, phone } = this.form.value;
+    const oldEmail = this.lawyer.lawyer.email;
+    const oldPhone = this.lawyer.lawyer.phone;
+
+    this.isLoading = true;
+
+    const emailChanged = email !== oldEmail;
+    const phoneChanged = phone !== oldPhone;
+
+    const checks: Promise<boolean>[] = [];
+
+    if (emailChanged) {
+      checks.push(this._lawyerService.checkEmail(email).toPromise());
     }
 
-    if (this.form.valid && this.lawyer.lawyer.id) {
-      const updateDto = {
-        ...this.form.value,
-        id: this.lawyer.lawyer.id,
-      };
-      this.isLoading = true;
+    if (phoneChanged) {
+      checks.push(this._lawyerService.checkPhone(phone).toPromise());
+    }
+
+    Promise.all(checks).then(results => {
+      let checkIndex = 0;
+
+      if (emailChanged && results[checkIndex]) {
+        this.isLoading = false;
+        Swal.fire({
+          icon: 'warning',
+          title: 'Email already exists',
+          text: 'Please use a different email address.',
+          toast: true,
+          position: 'bottom',
+          showConfirmButton: false,
+          timer: 4000,
+          background: '#d6aa26ff',
+          color: '#000',
+        });
+        return;
+      }
+      checkIndex += emailChanged ? 1 : 0;
+
+      if (phoneChanged && results[checkIndex]) {
+        this.isLoading = false;
+        Swal.fire({
+          icon: 'warning',
+          title: 'Phone number already exists',
+          text: 'Please use a different phone number.',
+          toast: true,
+          position: 'bottom',
+          showConfirmButton: false,
+          timer: 4000,
+          background: '#d6aa26ff',
+          color: '#000',
+        });
+        return;
+      }
+
       this._lawyerService.update(this.lawyer.lawyer.id, updateDto).subscribe({
         next: () => {
+          this.isLoading = false;
           Swal.fire({
             icon: 'success',
             title: 'Success',
@@ -117,65 +134,46 @@ export class EditLawyerComponent implements OnInit {
             timer: 5000,
             background: '#166534',
             color: '#fff',
-            customClass: {
-              popup: 'custom-swal-toast',
-            },
           });
-
-          this.isLoading = false;
-          this.router.navigate(['./lawyer/details', this.lawyer.lawyer.id]);
+          this.router.navigate(['/lawyer/details', this.lawyer.lawyer.id]);
         },
-        error: error => {
+        error: () => {
           this.isLoading = false;
-          if (error.status === 409) {
-            Swal.fire({
-              icon: 'error',
-              title: 'error',
-              text: 'Someone else has already modified this record. Please refresh and try again.!',
-              toast: true,
-              position: 'bottom',
-              showConfirmButton: false,
-              timer: 5000,
-              background: '#651616ff',
-              color: '#fff',
-              customClass: {
-                popup: 'custom-swal-toast',
-              },
-            });
-            this.lawyerDetails();
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'error',
-              text: 'Failed to update lawyer',
-              toast: true,
-              position: 'bottom',
-              showConfirmButton: false,
-              timer: 5000,
-              background: '#651616ff',
-              color: '#fff',
-              customClass: {
-                popup: 'custom-swal-toast',
-              },
-            });
-          }
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to update lawyer data.',
+            toast: true,
+            position: 'bottom',
+            showConfirmButton: false,
+            timer: 5000,
+            background: '#651616',
+            color: '#fff',
+          });
         },
       });
-    }
+    });
   }
+
   cancel(): void {
-    history.back(); // أو this.router.navigate(['/lawyers'])
+    this.router.navigate(['/lawyer']);
   }
 
-  loadAvilableCases(): void {
-    this._caseService
-      .getCaseWithLawyersAndHearingsList({ skipCount: 0, maxResultCount: 1000, sorting: '' })
-      .subscribe(res => {
-        const currentLawyerCaseId = this.lawyer?.lawyer.cases;
+  getStatusLabel(status: number | undefined): string {
+    const option = statusOptions.find(opt => opt.value === status);
+    return option?.key ?? '—';
+  }
 
-        this.availableCases = res.items.filter(
-          c => !c.lawyerDto?.id || c.lawyerDto.id === this.lawyer?.lawyer.id
-        );
-      });
+  getStatusClass(status: number | undefined): string {
+    switch (status) {
+      case 0:
+        return 'badge bg-primary';
+      case 1:
+        return 'badge bg-warning text-dark';
+      case 2:
+        return 'badge bg-danger';
+      default:
+        return 'badge bg-light text-dark';
+    }
   }
 }

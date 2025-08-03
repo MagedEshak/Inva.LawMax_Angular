@@ -1,3 +1,4 @@
+import type { Status } from '../../enums/status.enum';
 import type { CaseDto } from '../case/models';
 
 export interface HearingDto {
@@ -6,6 +7,11 @@ export interface HearingDto {
   location?: string;
   decision?: string;
   caseId?: string;
+  caseTitle?: string;
+  caseDescription?: string;
+  caseLitigationDegree?: string;
+  caseFinalVerdict?: string;
+  caseStatus?: Status;
   concurrencyStamp?: string;
 }
 

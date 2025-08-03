@@ -39,8 +39,8 @@ export class AddLawyerComponent implements OnInit {
         [Validators.maxLength(100), Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')],
       ],
       address: ['', [Validators.maxLength(200), Validators.required]],
-      caseId: [''],
       speciality: ['', [Validators.maxLength(100)]],
+      cases: [[]],
     });
 
     this.loadAvailableCases();
@@ -51,43 +51,86 @@ export class AddLawyerComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
+
+    const { email, phone } = this.form.value;
+
     this.isLoading = true;
-    this._lawyerService.create(this.form.value).subscribe({
-      next: () => {
+
+    // التحقق من البريد والموبايل
+    Promise.all([
+      this._lawyerService.checkEmail(email).toPromise(),
+      this._lawyerService.checkPhone(phone).toPromise(),
+    ]).then(([emailExists, phoneExists]) => {
+      if (emailExists) {
+        this.isLoading = false;
         Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Lawyer added successfully!',
+          icon: 'warning',
+          title: 'Email already exists',
+          text: 'Please use a different email address.',
           toast: true,
           position: 'bottom',
           showConfirmButton: false,
-          timer: 5000,
-          background: '#166534',
-          color: '#fff',
-          customClass: {
-            popup: 'custom-swal-toast',
-          },
+          timer: 4000,
+          background: '#d6aa26ff',
+          color: '#000',
         });
-        this.isLoading = false;
-        this.router.navigate(['/lawyer']);
-      },
-      error: err => {
+        return;
+      }
+
+      if (phoneExists) {
         this.isLoading = false;
         Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Failed to add lawyer!',
+          icon: 'warning',
+          title: 'Phone number already exists',
+          text: 'Please use a different phone number.',
           toast: true,
           position: 'bottom',
           showConfirmButton: false,
-          timer: 5000,
-          background: '#651616',
-          color: '#fff',
-          customClass: {
-            popup: 'custom-swal-toast',
-          },
+          timer: 4000,
+          background: '#d6aa26ff',
+          color: '#000',
         });
-      },
+        return;
+      }
+
+      // لو الاتنين مش موجودين نرسل الطلب
+      this._lawyerService.create(this.form.value).subscribe({
+        next: () => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Lawyer added successfully!',
+            toast: true,
+            position: 'bottom',
+            showConfirmButton: false,
+            timer: 5000,
+            background: '#166534',
+            color: '#fff',
+            customClass: {
+              popup: 'custom-swal-toast',
+            },
+          });
+          this.isLoading = false;
+          this.router.navigate(['/lawyer']);
+        },
+        error: err => {
+          this.isLoading = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to add lawyer!',
+            toast: true,
+            position: 'bottom',
+            showConfirmButton: false,
+            timer: 5000,
+            background: '#651616',
+            color: '#fff',
+            customClass: {
+              popup: 'custom-swal-toast',
+            },
+          });
+        },
+      });
     });
   }
 

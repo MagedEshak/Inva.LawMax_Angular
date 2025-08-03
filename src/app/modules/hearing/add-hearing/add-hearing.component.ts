@@ -38,7 +38,8 @@ export class AddHearingComponent implements OnInit {
     this.form = this.fb.group({
       date: ['', Validators.required],
       location: ['', [Validators.maxLength(200), Validators.required]],
-      caseId: [''],
+      decision: ['', [Validators.maxLength(200), Validators.required]],
+      caseId: [null],
     });
   }
 
@@ -90,7 +91,7 @@ export class AddHearingComponent implements OnInit {
     this._caseService
       .getCaseWithLawyersAndHearingsList({ skipCount: 0, maxResultCount: 1000, sorting: '' })
       .subscribe(res => {
-        this.availableCases = res.items.filter(c => !c.lawyerDto?.id);
+        this.availableCases = res.items;
       });
   }
 
