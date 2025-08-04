@@ -38,7 +38,7 @@ export class AddCaseComponent implements OnInit {
     private _lawyerService: LawyerService,
     private _hearingService: HearingService
   ) {}
-
+/// Initialize the component and set up the form with validation
   ngOnInit(): void {
     this.statusOptions = Object.keys(Status)
       .filter(key => !isNaN(Number(Status[key as any])))
@@ -63,7 +63,7 @@ export class AddCaseComponent implements OnInit {
     this.loadAvailableLawyers();
     this.loadAvailableHearings();
   }
-
+/// Submit the form to create a new case
   submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -110,18 +110,19 @@ export class AddCaseComponent implements OnInit {
       },
     });
   }
+  /// Load available lawyers and hearings for the dropdowns
   loadAvailableLawyers() {
     this._lawyerService.getList({ skipCount: 0, maxResultCount: 1000 }).subscribe(res => {
       this.availableLawyers = res.items;
     });
   }
-
+/// Load available hearings for the dropdowns
   loadAvailableHearings() {
     this._hearingService.getList({ skipCount: 0, maxResultCount: 1000 }).subscribe(res => {
       this.availableHearings = res.items.filter(h => !h.hearing.caseId);
     });
   }
-
+/// Cancel the form submission and navigate back to the case list
   cancel(): void {
     this.router.navigate(['/case']);
   }

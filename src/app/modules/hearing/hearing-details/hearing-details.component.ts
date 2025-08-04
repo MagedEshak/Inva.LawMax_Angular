@@ -24,27 +24,24 @@ export class HearingDetailsComponent implements OnInit {
     locale: 'en',
     height: 'auto',
   };
-
   allEvents: EventInput[] = [];
   selectedEvents: EventInput[] = [];
   selectedDate: string | null = null;
 
   constructor(private caseService: CaseService, private router: Router) {}
-
   ngOnInit(): void {
     this.loadCalendarData();
   }
-
+  /// Handle navigation to case details when an event is clicked
   goToCaseDetails(caseId: string): void {
     this.router.navigate(['case/details', caseId]);
   }
-
+  /// Load calendar data from the case service
   loadCalendarData(): void {
     this.caseService
       .getList({ skipCount: 0, maxResultCount: 1000, sorting: '' }, null)
       .subscribe(res => {
         this.allEvents = [];
-
         res.items.forEach(caseItem => {
           caseItem.hearingDtos?.forEach(hearing => {
             this.allEvents.push({
@@ -58,7 +55,6 @@ export class HearingDetailsComponent implements OnInit {
             });
           });
         });
-
         this.calendarOptions = {
           plugins: [dayGridPlugin, interactionPlugin],
           initialView: 'dayGridMonth',
@@ -74,11 +70,10 @@ export class HearingDetailsComponent implements OnInit {
         };
       });
   }
-
+  /// Handle date click event to filter events by selected date
   handleDateClick(arg: DateClickArg): void {
     const clickedDate = DateTime.fromJSDate(arg.date).toISODate();
     this.selectedDate = clickedDate;
-
     this.selectedEvents = this.allEvents.filter(event => {
       const eventDate = DateTime.fromJSDate(event.start as Date).toISODate();
       return eventDate === clickedDate;
