@@ -1,0 +1,125 @@
+@charset "UTF-8";
+/* إخفاء الراديو الافتراضي */
+.status-radio input[type=radio] {
+  display: none;
+}
+
+.status-radio {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+/* شكل الدائرة قبل التحديد */
+.status-radio .form-check-label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #b38b59;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+/* لون عند التحديد */
+.status-radio input[type=radio]:checked + .form-check-label::before {
+  background-color: currentColor;
+  border-color: currentColor;
+}
+
+/* ألوان الحالات */
+.status-open input[type=radio]:checked + .form-check-label::before {
+  color: #4B5320;
+  /* أخضر زيتوني */
+}
+
+.status-pending input[type=radio]:checked + .form-check-label::before {
+  color: #b38b59;
+  /* بيج غامق */
+}
+
+.status-closed input[type=radio]:checked + .form-check-label::before {
+  color: #d9534f;
+  /* أحمر */
+}
+
+/* تغيير لون النص مع الحالة */
+.status-open label {
+  color: #4B5320;
+}
+
+.status-pending label {
+  color: #b38b59;
+}
+
+.status-closed label {
+  color: #d9534f;
+}
+
+/* الكارت */
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
+}
+
+.card-header {
+  background: linear-gradient(to right, #4B5320, #b38b59);
+  color: #F3E2C7;
+  padding: 1.25rem 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-body {
+  background-color: #FDF6E3;
+}
+
+/* الليبلز */
+label.form-label {
+  color: #4B5320;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* الحقول */
+input.form-control,
+select.form-select {
+  border-radius: 12px;
+  border: 1px solid #b38b59;
+  font-size: 15px;
+  padding: 10px 14px;
+  background-color: #fffdf8;
+}
+
+/* عند التركيز */
+input.form-control:focus,
+select.form-select:focus {
+  border-color: #4B5320;
+  box-shadow: 0 0 0 0.1rem rgba(75, 83, 32, 0.25);
+}
+
+/* زرار الحفظ */
+button[type=submit] {
+  background: linear-gradient(to right, #4B5320, #b38b59);
+  border: none;
+  color: #F3E2C7;
+  transition: all 0.2s ease;
+}
+
+button[type=submit]:hover {
+  transform: scale(1.02);
+}
+
+/* تحسين الحقول */
+.form-control,
+.form-select {
+  border-radius: 0.5rem;
+  border: 1px solid #b38b59;
+}/*# sourceMappingURL=edit-lawyer.component.css.map */

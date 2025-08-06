@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .flip-card {
   background-color: transparent;
   width: 100%;
@@ -77,8 +78,9 @@
   background-color: #4675c0;
   color: #ffffff;
 }
-.addBtn:hover{
-color: #19335a;
+
+.addBtn:hover {
+  color: #19335a;
 }
 
 .viewBtn {
@@ -124,7 +126,6 @@ color: #19335a;
     transform: scaleX(0);
     opacity: 0;
   }
-
   100% {
     transform: scaleX(1);
     opacity: 1;
@@ -132,9 +133,8 @@ color: #19335a;
     -moz-transform: scaleX(1);
     -ms-transform: scaleX(1);
     -o-transform: scaleX(1);
+  }
 }
-}
-
 .line-top,
 .line-bottom {
   width: 65%;
@@ -152,4 +152,4 @@ color: #19335a;
 .line-bottom {
   margin-top: 30px;
   animation-delay: 0.6s;
-}
+}/*# sourceMappingURL=list-lawyers.component.css.map */

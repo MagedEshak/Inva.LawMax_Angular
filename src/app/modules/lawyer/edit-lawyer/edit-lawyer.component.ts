@@ -48,7 +48,7 @@ export class EditLawyerComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) return;
 
-    this._lawyerService.get(id).subscribe(lawyers => {
+    this._lawyerService.get(id, null).subscribe(lawyers => {
       this.lawyer = lawyers;
 
       this.form.patchValue({

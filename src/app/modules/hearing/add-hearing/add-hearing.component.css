@@ -1,0 +1,96 @@
+.status-radio input[type=radio] {
+  display: none;
+}
+
+.status-radio {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.status-radio .form-check-label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.status-radio input[type=radio]:checked + .form-check-label::before {
+  background-color: currentColor;
+  border-color: currentColor;
+}
+
+.status-open input[type=radio]:checked + .form-check-label::before {
+  color: #198754;
+}
+
+.status-pending input[type=radio]:checked + .form-check-label::before {
+  color: #ffc107;
+}
+
+.status-closed input[type=radio]:checked + .form-check-label::before {
+  color: #dc3545;
+}
+
+.card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
+}
+
+.card-header {
+  background: linear-gradient(to right, #1f3c88, #00b4db);
+  color: #fff;
+  padding: 1.25rem 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-body {
+  background-color: #f9f9f9;
+}
+
+label.form-label {
+  color: #34495e;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+input.form-control,
+select.form-select {
+  border-radius: 12px;
+  border: 1px solid #ced4da;
+  font-size: 15px;
+  padding: 10px 14px;
+}
+
+input.form-control:focus,
+select.form-select:focus {
+  border-color: #1f3c88;
+  box-shadow: 0 0 0 0.1rem rgba(31, 60, 136, 0.25);
+}
+
+button[type=submit] {
+  background: linear-gradient(to right, #1f3c88, #00b4db);
+  border: none;
+  transition: all 0.2s ease;
+}
+
+button[type=submit]:hover {
+  transform: scale(1.02);
+}
+
+.form-control,
+.form-select {
+  border-radius: 0.5rem;
+  border: 1px solid #dee2e6;
+}/*# sourceMappingURL=add-hearing.component.css.map */

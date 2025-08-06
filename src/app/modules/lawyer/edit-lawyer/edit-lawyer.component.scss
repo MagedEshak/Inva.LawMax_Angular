@@ -1,3 +1,4 @@
+/* إخفاء الراديو الافتراضي */
 .status-radio input[type="radio"] {
     display: none;
 }
@@ -9,6 +10,7 @@
     user-select: none;
 }
 
+/* شكل الدائرة قبل التحديد */
 .status-radio .form-check-label::before {
     content: '';
     position: absolute;
@@ -17,28 +19,47 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    border: 2px solid #ccc;
+    border: 2px solid #b38b59;
     background-color: white;
     transition: all 0.2s ease;
 }
 
+/* لون عند التحديد */
 .status-radio input[type="radio"]:checked+.form-check-label::before {
     background-color: currentColor;
     border-color: currentColor;
 }
 
+/* ألوان الحالات */
 .status-open input[type="radio"]:checked+.form-check-label::before {
-    color: #198754; // green
+    color: #4B5320;
+    /* أخضر زيتوني */
 }
 
 .status-pending input[type="radio"]:checked+.form-check-label::before {
-    color: #ffc107; // yellow
+    color: #b38b59;
+    /* بيج غامق */
 }
 
 .status-closed input[type="radio"]:checked+.form-check-label::before {
-    color: #dc3545; // red
+    color: #d9534f;
+    /* أحمر */
 }
 
+/* تغيير لون النص مع الحالة */
+.status-open label {
+    color: #4B5320;
+}
+
+.status-pending label {
+    color: #b38b59;
+}
+
+.status-closed label {
+    color: #d9534f;
+}
+
+/* الكارت */
 .card {
     border-radius: 20px;
     overflow: hidden;
@@ -46,40 +67,46 @@
 }
 
 .card-header {
-    background: linear-gradient(to right, #1f3c88, #00b4db);
-    color: #fff;
+    background: linear-gradient(to right, #4B5320, #b38b59);
+    color: #F3E2C7;
     padding: 1.25rem 2rem;
     font-size: 1.25rem;
     font-weight: 600;
 }
 
 .card-body {
-    background-color: #f9f9f9;
+    background-color: #FDF6E3;
 }
 
+/* الليبلز */
 label.form-label {
-    color: #34495e;
+    color: #4B5320;
     font-weight: 600;
     margin-bottom: 6px;
 }
 
+/* الحقول */
 input.form-control,
 select.form-select {
     border-radius: 12px;
-    border: 1px solid #ced4da;
+    border: 1px solid #b38b59;
     font-size: 15px;
     padding: 10px 14px;
+    background-color: #fffdf8;
 }
 
+/* عند التركيز */
 input.form-control:focus,
 select.form-select:focus {
-    border-color: #1f3c88;
-    box-shadow: 0 0 0 0.1rem rgba(31, 60, 136, 0.25);
+    border-color: #4B5320;
+    box-shadow: 0 0 0 0.1rem rgba(75, 83, 32, 0.25);
 }
 
+/* زرار الحفظ */
 button[type="submit"] {
-    background: linear-gradient(to right, #1f3c88, #00b4db);
+    background: linear-gradient(to right, #4B5320, #b38b59);
     border: none;
+    color: #F3E2C7;
     transition: all 0.2s ease;
 }
 
@@ -87,58 +114,9 @@ button[type="submit"]:hover {
     transform: scale(1.02);
 }
 
-.status-radio input[type="radio"] {
-    display: none;
-}
-
-.status-radio .form-check-label::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 4px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    background-color: white;
-    transition: all 0.2s ease;
-}
-
-.status-radio input[type="radio"]:checked+.form-check-label::before {
-    background-color: currentColor;
-    border-color: currentColor;
-}
-
-.status-open input[type="radio"]:checked+.form-check-label::before {
-    color: #198754;
-}
-
-.status-pending input[type="radio"]:checked+.form-check-label::before {
-    color: #ffc107;
-}
-
-.status-closed input[type="radio"]:checked+.form-check-label::before {
-    color: #dc3545;
-}
-
-.status-radio input[type="radio"] {
-    accent-color: #198754; // لون الراديو نفس لون الزرار الأخضر
-}
-
-.status-open label {
-    color: #0d6efd;
-}
-
-.status-pending label {
-    color: #ffc107;
-}
-
-.status-closed label {
-    color: #dc3545;
-}
-
+/* تحسين الحقول */
 .form-control,
 .form-select {
     border-radius: 0.5rem;
-    border: 1px solid #dee2e6;
+    border: 1px solid #b38b59;
 }

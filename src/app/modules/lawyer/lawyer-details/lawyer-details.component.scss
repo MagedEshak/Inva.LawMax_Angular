@@ -1,57 +1,106 @@
+/* الكارت */
 .lawyer-card {
     background: #fff;
+    color: #19335A;
+    border: 1px solid #8FC8EB;
     border-radius: 1rem;
     padding: 2rem;
     transition: all 0.3s ease-in-out;
+    animation: fadeSlideUp 0.5s ease-in-out;
 }
 
+.lawyer-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 18px rgba(25, 51, 90, 0.25);
+}
+
+/* تحريك عند الظهور */
+@keyframes fadeSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* بيانات المحامي */
 .lawyer-info,
 .case-list,
 .case-details {
     margin-bottom: 2rem;
+    border-radius: 10px;
+    box-shadow: 8px 9px 15px 4px #19335A;
+    padding: 1rem;
 }
 
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-
-    .full-width {
-        grid-column: span 2;
-    }
+/* العناوين */
+h2,
+h3,
+h4 {
+    color: #19335A;
+    font-weight: 700;
 }
 
+/* الجدول */
 .table {
     width: 100%;
     border-collapse: collapse;
-
-    th,
-    td {
-        padding: 0.75rem;
-        border-bottom: 1px solid #dee2e6;
-    }
-
-    th {
-        background-color: #f8f9fa;
-    }
-
-    tr:hover {
-        background-color: #f1f1f1;
-    }
+    border: 4px solid transparent;
+    border-radius: 12px;
+    border-image: linear-gradient(to right, #8FC8EB, #4675C0) 1;
+    border-image-slice: 1;
 }
 
+.table th,
+.table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #19335A;
+    color: #fff;
+    font-weight: 600;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    background: #E6F3FA;
+    color: #19335A !important;
+}
+
+.table-striped>tbody>tr:nth-of-type(even)>* {
+    background: #CDE7F6;
+    color: #19335A !important;
+}
+
+.table-striped>tbody>tr:hover>* {
+    background: #4675C0;
+    color: #fff !important;
+}
+
+/* تفاصيل القضايا */
 .case-details {
-    padding: 1.5rem;
-    background: #f9f9f9;
-    border-left: 5px solid #0dcaf0;
-    border-radius: 0.5rem;
+    background: #CDE7F6;
+    border: 4px solid transparent;
+    border-radius: 12px;
+    border-image: linear-gradient(to right, #8FC8EB, #4675C0) 1;
+    border-image-slice: 1;
     animation: slideIn 0.4s ease-in-out;
+    box-shadow: -20px 0px 0px 0px #19335A;
 }
 
 @keyframes slideIn {
     from {
         opacity: 0;
         transform: translateY(20px);
+        -webkit-transform: translateY(20px);
+        -moz-transform: translateY(20px);
+        -ms-transform: translateY(20px);
+        -o-transform: translateY(20px);
     }
 
     to {
@@ -60,6 +109,7 @@
     }
 }
 
+/* البادجات */
 .badge {
     padding: 0.4em 0.7em;
     border-radius: 0.25rem;
@@ -68,24 +118,14 @@
     display: inline-block;
 }
 
-.badge-secondary {
-    background-color: #6c757d;
-    color: #fff;
-}
-
 .badge-primary {
-    background-color: #007bff;
+    background-color: #4675C0;
     color: #fff;
 }
 
 .badge-warning {
-    background-color: #ffc107;
-    color: #212529;
-}
-
-.badge-success {
-    background-color: #28a745;
-    color: #fff;
+    background-color: #8FC8EB;
+    color: #19335A;
 }
 
 .badge-danger {
@@ -93,18 +133,69 @@
     color: #fff;
 }
 
-.badge-light {
-    background-color: #f8f9fa;
-    color: #212529;
-}
+/* زرار رئيسي */
 .btn-gradient {
-    background: linear-gradient(to right, #198754, #14532d); // من الأخضر إلى الزيتي
+    background: linear-gradient(to right, #19335A, #4675C0);
     color: #fff;
     border: none;
     transition: 0.3s;
 }
 
 .btn-gradient:hover {
-    background: linear-gradient(to right, #14532d, #0f3e23);
+    background: linear-gradient(to right, #4675C0, #19335A);
     color: #fff;
+}
+
+/* أزرار الأكشن */
+.viewBtn,
+.editBtn,
+.deleteBtn,
+.calenderBtn {
+    border-radius: 4px;
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.viewBtn {
+    background-color: #8FC8EB;
+    color: #19335A;
+}
+
+.editBtn {
+    background-color: #19335A;
+    color: #fff;
+}
+
+.deleteBtn {
+    background-color: #d9534f;
+    color: white;
+}
+
+.calenderBtn {
+    background-color: #4675C0;
+    color: white;
+}
+
+.viewBtn:hover {
+    background-color: #19335A;
+    color: #8FC8EB;
+}
+
+.editBtn:hover,
+.deleteBtn:hover,
+.calenderBtn:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.info-grid .full-width {
+    grid-column: span 2;
 }

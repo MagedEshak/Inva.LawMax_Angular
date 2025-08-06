@@ -1,0 +1,163 @@
+@charset "UTF-8";
+/* 🎯 رأس الجدول */
+.ngx-datatable .datatable-header {
+  border-top-left-radius: 16px !important;
+  border-top-right-radius: 16px !important;
+  background: linear-gradient(to right, #1E2A38, #3E8DD9);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.ngx-datatable .datatable-header-cell {
+  padding: 20px !important;
+  border-bottom: 1px solid #325168;
+}
+
+/* 🎯 صفوف الجدول */
+.ngx-datatable .datatable-body-row {
+  transition: background-color 0.2s ease;
+}
+
+.ngx-datatable .datatable-body-row:hover {
+  background-color: #f0f0f0;
+}
+
+.ngx-datatable .datatable-row-even {
+  background-color: #ffffff;
+}
+
+.ngx-datatable .datatable-row-odd {
+  background-color: #f6f8fa;
+}
+
+/* 🎯 خلايا الجدول */
+.ngx-datatable .datatable-body-cell {
+  padding: 12px;
+  font-size: 14px;
+  color: #2E2E2E;
+  border-bottom: 1px solid #eaeaea;
+}
+
+/* 🎯 أزرار الأكشن */
+.ngx-datatable .datatable-body-cell .btn {
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.ngx-datatable .datatable-body-cell .btn-outline-primary {
+  color: #3E8DD9;
+  border-color: #3E8DD9;
+}
+
+.ngx-datatable .datatable-body-cell .btn-outline-primary:hover {
+  background-color: #3E8DD9;
+  color: white;
+}
+
+.ngx-datatable .datatable-body-cell .btn-outline-warning {
+  color: #f0ad4e;
+  border-color: #f0ad4e;
+}
+
+.ngx-datatable .datatable-body-cell .btn-outline-warning:hover {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.ngx-datatable .datatable-body-cell .btn-outline-danger {
+  color: #d9534f;
+  border-color: #d9534f;
+}
+
+.ngx-datatable .datatable-body-cell .btn-outline-danger:hover {
+  background-color: #d9534f;
+  color: white;
+}
+
+.ngx-datatable .datatable-body-cell .btn:hover {
+  transform: scale(1.05);
+}
+
+/* 🎯 Shadow وأطراف ناعمة للجدول */
+.ngx-datatable {
+  border-radius: 16px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+  overflow: hidden;
+}
+
+/* 🎯 تنسيق الفوتر */
+.ngx-datatable .datatable-footer {
+  background-color: #f6f8fa !important;
+  border-top: 1px solid #dbe2ea !important;
+  padding: 10px 15px !important;
+  font-size: 14px;
+  color: #444;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ngx-datatable .datatable-footer .page-count {
+  font-weight: 500;
+  color: #6c757d;
+}
+
+.ngx-datatable .datatable-footer .pager {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ngx-datatable .datatable-footer .pager .pages {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.ngx-datatable .datatable-footer .pager .pages li {
+  list-style: none;
+}
+
+.ngx-datatable .datatable-footer .pager .pages li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  font-size: 14px;
+  color: #3E8DD9;
+  border: 1px solid #3E8DD9;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: 0.2s ease;
+  font-weight: 500;
+  background-color: white;
+}
+
+.ngx-datatable .datatable-footer .pager .pages li a:hover {
+  background-color: #3E8DD9;
+  color: white;
+}
+
+.ngx-datatable .datatable-footer .pager .pages li.active a {
+  background-color: #3E8DD9;
+  color: white;
+  border-color: #3E8DD9;
+  font-weight: bold;
+}
+
+.ngx-datatable .datatable-footer .pager .datatable-icon-left,
+.ngx-datatable .datatable-footer .pager .datatable-icon-right {
+  font-size: 16px;
+  color: #3E8DD9;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.ngx-datatable .datatable-footer .pager .datatable-icon-left:hover,
+.ngx-datatable .datatable-footer .pager .datatable-icon-right:hover {
+  color: #1E2A38;
+}/*# sourceMappingURL=list-case.component.css.map */

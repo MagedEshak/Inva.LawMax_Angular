@@ -85,7 +85,7 @@ export class LawyerDetailsComponent implements OnInit {
       case 1:
         return 'badge badge-warning'; // Pending
       case 2:
-        return 'badge badge-dange'; // InProgress
+        return 'badge badge-danger'; // InProgress
       default:
         return 'badge badge-light';
     }

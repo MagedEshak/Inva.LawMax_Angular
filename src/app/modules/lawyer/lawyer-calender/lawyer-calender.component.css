@@ -1,0 +1,104 @@
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Calendar Container */
+::ng-deep .fc {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
+  color: #1E2A38;
+}
+
+/* Remove default table borders */
+::ng-deep .fc td,
+::ng-deep .fc th {
+  border: none !important;
+}
+
+/* Calendar header title */
+::ng-deep .fc-toolbar-title {
+  font-weight: 600;
+  font-size: 20px;
+  color: #1E2A38;
+  text-decoration: none;
+}
+
+/* Navigation buttons */
+::ng-deep .fc-button {
+  background-color: #1E2A38;
+  border: none;
+  color: #fff;
+  border-radius: 0.375rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 13px;
+}
+
+::ng-deep .fc-button:hover {
+  background-color: #3E8DD9;
+}
+
+/* Day numbers (remove underline) */
+::ng-deep .fc-daygrid-day-number {
+  color: #1E2A38;
+  font-weight: 500;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+::ng-deep .fc-col-header-cell-cushion {
+  color: #1E2A38;
+  font-weight: 500;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Today cell */
+::ng-deep .fc-day-today {
+  background-color: #E9F3FB !important;
+  border: 1px solid #3E8DD9;
+  border-radius: 0.5rem;
+}
+
+/* Hover effect */
+::ng-deep .fc-daygrid-day:hover {
+  background-color: #F7FAFC;
+  cursor: pointer;
+}
+
+/* Events */
+::ng-deep .fc-event {
+  background-color: #3E8DD9;
+  border: none;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+::ng-deep .fc-event:hover {
+  background-color: #2F7CC7;
+  color: #000;
+}/*# sourceMappingURL=lawyer-calender.component.css.map */

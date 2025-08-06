@@ -1,8 +1,8 @@
 import { RestService, Rest } from '@abp/ng.core';
-import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
+import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
 import type { CreateUpdateLawyerDto, LawyerDto } from '../../../dtos/lawyer/models';
-import type { LawyerWithNavigationPropertyDto } from '../dtos/lawyer/models';
+import type { GetLawyerFilterDto, LawyerWithNavigationPropertyDto } from '../dtos/lawyer/models';
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +46,7 @@ export class LawyerService {
     { apiName: this.apiName,...config });
   
 
-  get = (id: string, date?: string, config?: Partial<Rest.Config>) =>
+  get = (id: string, date: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, LawyerWithNavigationPropertyDto>({
       method: 'GET',
       url: `/api/Lawyer/${id}`,
@@ -55,11 +55,11 @@ export class LawyerService {
     { apiName: this.apiName,...config });
   
 
-  getList = (input: PagedAndSortedResultRequestDto, config?: Partial<Rest.Config>) =>
+  getList = (input: GetLawyerFilterDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<LawyerWithNavigationPropertyDto>>({
       method: 'GET',
       url: '/api/Lawyer/all',
-      params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      params: { filter: input.filter, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
   

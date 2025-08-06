@@ -2,12 +2,11 @@
     <div class="lawyer-card shadow">
         <!-- Lawyer Info -->
         <section class="lawyer-info">
-
-            <div class="px-4 py-3 d-flex justify-content-between align-items-center">
+            <div class="pe-4 ps-2 py-3 d-flex justify-content-between align-items-center">
                 <h2>
                     Lawyer Details
                 </h2>
-                <a [routerLink]="['/lawyer']" class="btn btn-outline-secondary btn-sm">
+                <a [routerLink]="['/lawyer']" class="btn editBtn">
                     <i class="fas fa-arrow-left me-1"></i> Back to List
                 </a>
             </div>
@@ -25,8 +24,8 @@
         <section class="case-list">
             <h3>Related Cases</h3>
             <hr>
-            <table class="table">
-                <thead>
+            <table class="table table-striped">
+                <thead class="table-header">
                     <tr>
                         <th>Title</th>
                         <th>Status</th>
@@ -43,13 +42,12 @@
                             </span>
                         </td>
 
-
                         <td>
                             {{ caseItem.hearingDtos?.length ? (caseItem.hearingDtos[0].date | date:'mediumDate') : '—'
                             }}
                         </td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary" (click)="selectCase(caseItem)">
+                            <button class="btn viewBtn" (click)="selectCase(caseItem)">
                                 <i class="fas fa-eye"></i> Details
                             </button>
                         </td>
@@ -66,7 +64,7 @@
 
         <!-- Case Details Section -->
         <section class="case-details" *ngIf="selectedCase" [@fadeIn]>
-            <h4 class="text-info">Case Details</h4>
+            <h4 class="">Case Details</h4>
             <hr>
             <div class="info-grid">
                 <div><strong>Title:</strong> {{ selectedCase.caseTitle }}</div>

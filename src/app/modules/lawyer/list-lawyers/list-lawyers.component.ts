@@ -6,10 +6,12 @@ import { id, NgxDatatableModule } from '@swimlane/ngx-datatable';
 import Swal from 'sweetalert2';
 import { LawyerService } from 'src/app/proxy/inva/law-cases/controller';
 import { LawyerWithNavigationPropertyDto } from 'src/app/proxy/inva/law-cases/dtos/lawyer';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 
 @Component({
   selector: 'app-list-lawyers',
-  imports: [NgxDatatableModule, CommonModule, RouterLink],
+  imports: [NgxDatatableModule, CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './list-lawyers.component.html',
   styleUrl: './list-lawyers.component.scss',
   encapsulation: ViewEncapsulation.None,
@@ -22,41 +24,34 @@ export class ListLawyersComponent implements OnInit {
     skipCount: 0,
     sorting: '',
   };
-
+  searchForm: FormGroup;
   isLoading = false;
-  constructor(private _lawyerService: LawyerService) {}
+  constructor(private _lawyerService: LawyerService, private fb: FormBuilder) {
+    this.formBuiling();
+  }
 
   ngOnInit(): void {
+     
+    this.searchForm.valueChanges
+      .pipe(
+        debounceTime(300), // انتظار 300ms قبل إرسال الطلب
+        distinctUntilChanged() // ما تبعتش إلا لو القيم فعلاً اتغيرت
+      )
+      .subscribe(() => {
+        this.filterForm();
+      });
     this.loadAllLawyers();
+  }
+
+  formBuiling() {
+    this.searchForm = this.fb.group({
+      filter: new FormControl(''),
+    });
   }
 
   loadAllLawyers(): void {
     this.isLoading = true;
-    this._lawyerService.getList(this.input).subscribe({
-      next: res => {
-        this.totalCount = res.totalCount;
-        this.lawyers = res.items;
-        this.isLoading = false;
-      },
-      error: () => {
-        Swal.fire({
-          icon: 'error',
-          title: 'error',
-          text: 'Failed to load Lawyers!',
-          toast: true,
-          position: 'bottom',
-          showConfirmButton: false,
-          timer: 5000,
-          background: '#651616ff',
-          color: '#fff',
-          customClass: {
-            popup: 'custom-swal-toast',
-          },
-        });
-
-        this.isLoading = false;
-      },
-    });
+    this.filterForm();
   }
 
   deleteLawyer(id: string) {
@@ -112,6 +107,33 @@ export class ListLawyersComponent implements OnInit {
           },
         });
       }
+    });
+  }
+
+  filterForm() {
+    this._lawyerService.getList(this.searchForm.value).subscribe({
+      next: res => {
+        this.totalCount = res.totalCount;
+        this.lawyers = res.items;
+        this.isLoading = false;
+      },
+      error: () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'error',
+          text: 'Failed to load Lawyers!',
+          toast: true,
+          position: 'bottom',
+          showConfirmButton: false,
+          timer: 5000,
+          background: '#651616ff',
+          color: '#fff',
+          customClass: {
+            popup: 'custom-swal-toast',
+          },
+        });
+        this.isLoading = false;
+      },
     });
   }
 }

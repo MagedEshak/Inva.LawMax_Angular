@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import * as AOS from 'aos'; // استيراد مكتبة AOS
 
 @Component({
   standalone: false,
@@ -8,6 +9,12 @@ import { Component } from '@angular/core';
     <abp-dynamic-layout></abp-dynamic-layout>
   `,
 })
-export class AppComponent {
-
+export class AppComponent implements AfterViewInit {
+  ngAfterViewInit(): void {
+    AOS.init({
+      duration: 1000, // مدة الأنيميشن
+      once: true, // يعمل مرة واحدة فقط
+    });
+    AOS.refresh();
+  }
 }
