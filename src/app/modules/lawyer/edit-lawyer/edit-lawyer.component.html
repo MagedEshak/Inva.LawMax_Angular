@@ -1,6 +1,6 @@
 <main class="container py-5">
-    <section class="card border-0 shadow-lg rounded-4">
-        <div class="card-header bg-dark text-white py-3 rounded-top-4 d-flex align-items-center">
+    <section class="card ">
+        <div class="card-header py-3 rounded-top-4 d-flex align-items-center">
             <i class="fas fa-user-edit me-2 fs-4"></i>
             <h5 class="mb-0">Edit Lawyer Information</h5>
         </div>
@@ -35,7 +35,7 @@
                     <button type="button" class="btn cancle btn-lg px-4" (click)="cancel()">
                         <i class="fas fa-arrow-left me-2"></i> Cancel
                     </button>
-                    <button type="submit" class="btn btn-success btn-lg px-5" [disabled]="form.invalid || isLoading">
+                    <button type="submit" class="btn btn-gradient btn-lg px-5" [disabled]="form.invalid || form.dirty || isLoading">
                         <ng-container *ngIf="!isLoading; else loading">
                             <i class="fas fa-save me-2"></i> Save Changes
                         </ng-container>
@@ -49,8 +49,8 @@
         </div>
 
         <div class="px-4 py-4 border-top bg-white">
-            <h5 class="mb-3 text-dark fw-semibold">
-                <i class="fas fa-briefcase me-2 text-info"></i> Assigned Cases
+            <h5 class="mb-3 fw-semibold">
+                <i class="fas fa-briefcase me-2"></i> Assigned Cases
             </h5>
 
             <ul class="list-group">

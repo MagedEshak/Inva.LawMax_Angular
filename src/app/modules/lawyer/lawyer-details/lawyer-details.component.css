@@ -2,8 +2,8 @@
 /* الكارت */
 .lawyer-card {
   background: #fff;
-  color: #19335A;
-  border: 1px solid #8FC8EB;
+  color: #19335a;
+  border: 1px solid #8fc8eb;
   border-radius: 1rem;
   padding: 2rem;
   transition: all 0.3s ease-in-out;
@@ -32,7 +32,7 @@
 .case-details {
   margin-bottom: 2rem;
   border-radius: 10px;
-  box-shadow: 8px 9px 15px 4px #19335A;
+  box-shadow: 8px 9px 15px 4px #19335a;
   padding: 1rem;
 }
 
@@ -40,7 +40,7 @@
 h2,
 h3,
 h4 {
-  color: #19335A;
+  color: #19335a;
   font-weight: 700;
 }
 
@@ -50,8 +50,8 @@ h4 {
   border-collapse: collapse;
   border: 4px solid transparent;
   border-radius: 12px;
-  -o-border-image: linear-gradient(to right, #8FC8EB, #4675C0) 1;
-     border-image: linear-gradient(to right, #8FC8EB, #4675C0) 1;
+  -o-border-image: linear-gradient(to right, #8fc8eb, #4675c0) 1;
+     border-image: linear-gradient(to right, #8fc8eb, #4675c0) 1;
   border-image-slice: 1;
 }
 
@@ -62,36 +62,36 @@ h4 {
 }
 
 .table th {
-  background-color: #19335A;
+  background-color: #19335a;
   color: #fff;
   font-weight: 600;
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) > * {
-  background: #E6F3FA;
-  color: #19335A !important;
+  background: #e6f3fa;
+  color: #19335a !important;
 }
 
 .table-striped > tbody > tr:nth-of-type(even) > * {
-  background: #CDE7F6;
-  color: #19335A !important;
+  background: #cde7f6;
+  color: #19335a !important;
 }
 
 .table-striped > tbody > tr:hover > * {
-  background: #4675C0;
+  background: #4675c0;
   color: #fff !important;
 }
 
 /* تفاصيل القضايا */
 .case-details {
-  background: #CDE7F6;
+  background: #cde7f6;
   border: 4px solid transparent;
   border-radius: 12px;
-  -o-border-image: linear-gradient(to right, #8FC8EB, #4675C0) 1;
-     border-image: linear-gradient(to right, #8FC8EB, #4675C0) 1;
+  -o-border-image: linear-gradient(to right, #8fc8eb, #4675c0) 1;
+     border-image: linear-gradient(to right, #8fc8eb, #4675c0) 1;
   border-image-slice: 1;
   animation: slideIn 0.4s ease-in-out;
-  box-shadow: -20px 0px 0px 0px #19335A;
+  box-shadow: -20px 0px 0px 0px #19335a;
 }
 
 @keyframes slideIn {
@@ -118,13 +118,13 @@ h4 {
 }
 
 .badge-primary {
-  background-color: #4675C0;
+  background-color: #4675c0;
   color: #fff;
 }
 
 .badge-warning {
-  background-color: #8FC8EB;
-  color: #19335A;
+  background-color: #8fc8eb;
+  color: #19335a;
 }
 
 .badge-danger {
@@ -134,22 +134,19 @@ h4 {
 
 /* زرار رئيسي */
 .btn-gradient {
-  background: linear-gradient(to right, #19335A, #4675C0);
+  background: linear-gradient(to right, #19335a, #4675c0);
   color: #fff;
   border: none;
   transition: 0.3s;
 }
 
 .btn-gradient:hover {
-  background: linear-gradient(to right, #4675C0, #19335A);
+  background: linear-gradient(to right, #4675c0, #19335a);
   color: #fff;
 }
 
-/* أزرار الأكشن */
-.viewBtn,
 .editBtn,
-.deleteBtn,
-.calenderBtn {
+.backBtn {
   border-radius: 4px;
   font-size: 0.9rem;
   padding: 6px 10px;
@@ -157,34 +154,19 @@ h4 {
   transition: all 0.3s ease-in-out;
 }
 
-.viewBtn {
-  background-color: #8FC8EB;
-  color: #19335A;
+.backBtn {
+  background-color: #19335a;
+  color: white;
 }
 
 .editBtn {
-  background-color: #19335A;
-  color: #fff;
-}
-
-.deleteBtn {
-  background-color: #d9534f;
-  color: white;
-}
-
-.calenderBtn {
-  background-color: #4675C0;
-  color: white;
-}
-
-.viewBtn:hover {
-  background-color: #19335A;
-  color: #8FC8EB;
+  color: #19335a;
+  right: 2rem !important;
+  bottom: 1rem !important;
 }
 
 .editBtn:hover,
-.deleteBtn:hover,
-.calenderBtn:hover {
+.backBtn:hover {
   opacity: 0.85;
   transform: scale(1.05);
 }

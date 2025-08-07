@@ -59,16 +59,16 @@ export class EditLawyerComponent implements OnInit {
   }
 
   submit(): void {
+    const { email, phone } = this.form.value;
+    const oldEmail = this.lawyer.lawyer.email;
+    const oldPhone = this.lawyer.lawyer.phone;
+
     if (this.form.invalid || !this.form.dirty || !this.lawyer?.lawyer.id) return;
 
     const updateDto = {
       ...this.form.value,
       id: this.lawyer.lawyer.id,
     };
-
-    const { email, phone } = this.form.value;
-    const oldEmail = this.lawyer.lawyer.email;
-    const oldPhone = this.lawyer.lawyer.phone;
 
     this.isLoading = true;
 
@@ -156,7 +156,7 @@ export class EditLawyerComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(['/lawyer']);
+    this.router.navigate(['/lawyer/details',this.lawyer.lawyer.id]);
   }
 
   getStatusLabel(status: number | undefined): string {
@@ -167,11 +167,11 @@ export class EditLawyerComponent implements OnInit {
   getStatusClass(status: number | undefined): string {
     switch (status) {
       case 0:
-        return 'badge bg-primary';
+        return 'badge badge-primary';
       case 1:
-        return 'badge bg-warning text-dark';
+        return 'badge badge-warning';
       case 2:
-        return 'badge bg-danger';
+        return 'badge badge-danger';
       default:
         return 'badge bg-light text-dark';
     }

@@ -1,86 +1,63 @@
-.status-radio input[type=radio] {
-  display: none;
-}
-
-.status-radio {
-  position: relative;
-  padding-left: 30px;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-}
-
-.status-radio .form-check-label::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 4px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  background-color: white;
-  transition: all 0.2s ease;
-}
-
-.status-radio input[type=radio]:checked + .form-check-label::before {
-  background-color: currentColor;
-  border-color: currentColor;
-}
-
-.status-open input[type=radio]:checked + .form-check-label::before {
-  color: #198754;
-}
-
-.status-pending input[type=radio]:checked + .form-check-label::before {
-  color: #ffc107;
-}
-
-.status-closed input[type=radio]:checked + .form-check-label::before {
-  color: #dc3545;
-}
-
+@charset "UTF-8";
+/* الكارت */
 .card {
   border-radius: 20px;
   overflow: hidden;
-  border: none;
+  box-shadow: 10px 0px 0px 0px #19335a;
+  transition: all 0.3s ease-in-out;
+  animation: fadeSlideUp 0.5s ease-in-out;
 }
 
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .card-header {
-  background: linear-gradient(to right, #1f3c88, #00b4db);
-  color: #fff;
+  background: linear-gradient(to right, #8fc8eb, #4675c0);
+  color: #19335a;
   padding: 1.25rem 2rem;
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .card-body {
-  background-color: #f9f9f9;
+  background-color: #fdf6e3;
 }
 
+/* الليبلز */
 label.form-label {
-  color: #34495e;
+  color: #19335a;
   font-weight: 600;
   margin-bottom: 6px;
 }
 
+/* الحقول */
 input.form-control,
 select.form-select {
   border-radius: 12px;
-  border: 1px solid #ced4da;
+  border: 1px solid #19335a;
   font-size: 15px;
   padding: 10px 14px;
+  background-color: white;
 }
 
+/* عند التركيز */
 input.form-control:focus,
 select.form-select:focus {
-  border-color: #1f3c88;
-  box-shadow: 0 0 0 0.1rem rgba(31, 60, 136, 0.25);
+  border-color: #4675c0;
+  box-shadow: 0 0 0 0.1rem rgba(75, 83, 32, 0.25);
 }
 
+/* زرار الحفظ */
 button[type=submit] {
-  background: linear-gradient(to right, #1f3c88, #00b4db);
+  background: linear-gradient(to right, #19335a, #4675c0);
+  color: #fff;
   border: none;
   transition: all 0.2s ease;
 }
@@ -89,8 +66,62 @@ button[type=submit]:hover {
   transform: scale(1.02);
 }
 
+/* تحسين الحقول */
 .form-control,
 .form-select {
   border-radius: 0.5rem;
-  border: 1px solid #dee2e6;
+  border: 1px solid #8fc8eb;
+}
+
+/* زرار رئيسي */
+.btn-gradient:hover {
+  background: linear-gradient(to right, #4675c0, #19335a);
+  color: #fff;
+}
+
+h2,
+h3,
+h4,
+h5 {
+  color: #19335a;
+  font-weight: 700;
+}
+
+/* زرار رئيسي */
+.btn-gradient {
+  background: linear-gradient(to right, #19335a, #4675c0);
+  color: #fff;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(to right, #4675c0, #19335a);
+  color: #fff;
+}
+
+.editBtn,
+.backBtn {
+  border-radius: 4px;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.backBtn {
+  background-color: #19335a;
+  color: white;
+}
+
+.editBtn {
+  color: #19335a;
+  right: 2rem !important;
+  bottom: 1rem !important;
+}
+
+.editBtn:hover,
+.backBtn:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
 }/*# sourceMappingURL=add-lawyer.component.css.map */

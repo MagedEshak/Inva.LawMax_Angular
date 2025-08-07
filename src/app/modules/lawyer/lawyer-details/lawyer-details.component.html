@@ -1,12 +1,12 @@
 <main class="container py-5">
     <div class="lawyer-card shadow">
         <!-- Lawyer Info -->
-        <section class="lawyer-info">
+        <section class="lawyer-info position-relative">
             <div class="pe-4 ps-2 py-3 d-flex justify-content-between align-items-center">
                 <h2>
                     Lawyer Details
                 </h2>
-                <a [routerLink]="['/lawyer']" class="btn editBtn">
+                <a [routerLink]="['/lawyer']" class="btn backBtn">
                     <i class="fas fa-arrow-left me-1"></i> Back to List
                 </a>
             </div>
@@ -18,6 +18,10 @@
                 <div><strong>Speciality:</strong> {{ lawyer?.lawyer?.speciality || '—' }}</div>
                 <div class="full-width"><strong>Address:</strong> {{ lawyer?.lawyer?.address || '—' }}</div>
             </div>
+
+            <a [routerLink]="['/lawyer/edit', lawyer.lawyer.id]" class="btn editBtn position-absolute">
+                <i class="fas fa-edit"></i>
+            </a>
         </section>
 
         <!-- Cases Table -->

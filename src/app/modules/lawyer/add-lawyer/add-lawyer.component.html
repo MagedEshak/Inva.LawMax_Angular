@@ -1,5 +1,5 @@
 <main class="container py-5">
-    <div class="card border-0 shadow-lg rounded-4">
+    <div class="card rounded-4">
         <div class="card-header bg-success text-white d-flex justify-content-between align-items-center rounded-top-4">
             <h5 class="mb-0 d-flex align-items-center">
                 <i class="fas fa-user-plus me-2 fs-5"></i> Add New Lawyer
@@ -38,21 +38,12 @@
                     </div>
                 </div>
 
-                <!-- <div class="col-md-12">
-                    <label for="caseId" class="form-label fw-semibold">Assign Case</label>
-                    <select id="caseId" formControlName="caseId" class="form-select form-select-lg shadow-sm">
-                        <option [ngValue]="null" selected disabled>— No Case —</option>
-                        <option *ngFor="let c of availableCases" [ngValue]="c.caseDto.id">
-                            {{ c.caseDto.title }}
-                        </option>
-                    </select>
-                </div> -->
 
                 <div class="d-flex justify-content-between align-items-center mt-5">
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4" (click)="cancel()">
+                    <button type="button" class="btn editBtn btn-lg px-4" (click)="cancel()">
                         <i class="fas fa-arrow-left me-2"></i> Cancel
                     </button>
-                    <button type="submit" class="btn btn-success btn-lg px-5" [disabled]="form.invalid || isLoading">
+                    <button type="submit" class="btn btn-gradient btn-lg px-5" [disabled]="form.invalid || isLoading">
                         <ng-container *ngIf="!isLoading; else loading">
                             <i class="fas fa-save me-2"></i> Save Lawyer
                         </ng-container>
